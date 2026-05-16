@@ -1,0 +1,193 @@
+/* =============================================
+   Geometry & Math Section Styles
+   Fibonacci spiral + hidden Otavalo ikat background
+   ============================================= */
+
+/* ---- Fibonacci Spiral ---- */
+
+.fibonacci-spiral {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: var(--phi);
+  margin: var(--space-lg) auto;
+}
+
+.fib-square {
+  position: absolute;
+  border: 2px solid var(--color-accent);
+  background: rgba(161, 184, 97, 0.08);
+}
+
+.fib-square::after {
+  content: '';
+  position: absolute;
+  border: 2px solid var(--color-accent-dark);
+  border-radius: 50%;
+}
+
+.fib-square--13 {
+  width: 61.8%;
+  height: 100%;
+  right: 0;
+  top: 0;
+}
+
+.fib-square--13::after {
+  width: 200%;
+  height: 200%;
+  bottom: 0;
+  left: 0;
+  clip-path: inset(0 50% 50% 0);
+}
+
+.fib-square--8 {
+  width: 38.2%;
+  height: 61.8%;
+  left: 0;
+  bottom: 0;
+}
+
+.fib-square--8::after {
+  width: 200%;
+  height: 200%;
+  top: 0;
+  left: 0;
+  clip-path: inset(50% 0 0 50%);
+}
+
+.fib-square--5 {
+  width: 23.6%;
+  height: 38.2%;
+  left: 0;
+  top: 0;
+}
+
+.fib-square--5::after {
+  width: 200%;
+  height: 200%;
+  top: 0;
+  right: 0;
+  clip-path: inset(50% 0 0 50%);
+}
+
+.fib-square--3 {
+  width: 14.6%;
+  height: 23.6%;
+  right: 38.2%;
+  top: 0;
+}
+
+.fib-square--3::after {
+  width: 200%;
+  height: 200%;
+  bottom: 0;
+  right: 0;
+  clip-path: inset(0 0 50% 50%);
+}
+
+.fib-square--2 {
+  width: 9%;
+  height: 14.6%;
+  right: 38.2%;
+  bottom: 61.8%;
+}
+
+.fib-square--1a {
+  width: 5.6%;
+  height: 9%;
+  left: 23.6%;
+  top: 0;
+}
+
+.fib-square--1b {
+  width: 5.6%;
+  height: 5.6%;
+  left: 23.6%;
+  top: 9%;
+}
+
+.fibonacci-label {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  margin-top: var(--space-xs);
+}
+
+/* ---- Math Concept Cards ---- */
+
+.math-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.math-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: var(--space-md);
+}
+
+.math-card-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-xs);
+}
+
+.math-card h3 {
+  font-size: 1rem;
+}
+
+.math-card p {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0;
+}
+
+/* ---- Ikat Background Easter Egg ---- */
+
+#geometry::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.025;
+  background: repeating-linear-gradient(
+    0deg,
+    #1a1a4e 0px, #1a1a4e 6px,
+    #2c6e8a 6px, #2c6e8a 10px,
+    #5ba3c9 10px, #5ba3c9 13px,
+    #a8d4e6 13px, #a8d4e6 16px,
+    #5ba3c9 16px, #5ba3c9 19px,
+    #2c6e8a 19px, #2c6e8a 23px,
+    #1a1a4e 23px, #1a1a4e 29px
+  );
+}
+
+/* ---- Symmetry demo ---- */
+
+.symmetry-demo {
+  display: grid;
+  grid-template-columns: repeat(4, 80px);
+  gap: var(--space-xs);
+  margin: var(--space-md) 0;
+}
+
+.symmetry-demo .quilt-block {
+  width: 80px;
+  height: 80px;
+}
+
+.sym-label {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  text-align: center;
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
+}

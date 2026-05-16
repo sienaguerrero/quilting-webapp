@@ -1,0 +1,467 @@
+/* ============================================
+   Quilt Planner
+   ============================================ */
+
+.planner-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.planner-setup {
+  grid-column: 1;
+  grid-row: 1 / 20;
+}
+
+.planner-blocks,
+.planner-grid-preview,
+.planner-math {
+  grid-column: 2;
+}
+
+.planner-panel {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: var(--space-md);
+}
+
+.planner-panel h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin: 0 0 var(--space-md);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.planner-panel h4 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* ---- Setup Panel ---- */
+
+.planner-setup {
+  position: sticky;
+  top: calc(var(--nav-height, 60px) + var(--space-md));
+}
+
+.planner-field {
+  margin-bottom: var(--space-sm);
+}
+
+.planner-field label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
+.planner-field select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+}
+
+.planner-summary {
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+}
+
+.planner-summary h4 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.summary-dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.summary-dl dt {
+  color: var(--color-text-muted);
+}
+
+.summary-dl dd {
+  margin: 0;
+  font-weight: 500;
+  text-align: right;
+}
+
+/* ---- Block Palette ---- */
+
+.block-palette-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: var(--space-sm);
+}
+
+.palette-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: var(--space-xs);
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background: var(--color-bg);
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.palette-block:hover {
+  border-color: var(--color-text-light);
+}
+
+.palette-block.selected {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent) 25%, transparent);
+}
+
+.palette-preview {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.palette-name {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.palette-meta {
+  font-size: 0.6rem;
+  color: var(--color-text-muted);
+}
+
+/* ---- Grid Preview ---- */
+
+.quilt-grid-wrap {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.grid-cell {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: opacity 0.15s;
+  min-height: 0;
+}
+
+.grid-cell:hover {
+  opacity: 0.8;
+}
+
+.grid-hint {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: var(--space-xs);
+}
+
+/* ---- Math & Geometry ---- */
+
+.calc-section {
+  margin-bottom: var(--space-lg);
+}
+
+.calc-section h4 {
+  margin-bottom: var(--space-sm);
+}
+
+.calc-intro {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  margin-bottom: var(--space-sm);
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-sm);
+}
+
+.calc-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: var(--space-sm) var(--space-md);
+}
+
+.calc-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+
+.calc-formula {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.8rem;
+  color: var(--color-accent);
+  margin-bottom: 6px;
+}
+
+.calc-result {
+  font-size: 0.85rem;
+}
+
+.calc-note {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 6px;
+  font-style: italic;
+}
+
+/* ---- Yield Table ---- */
+
+.yield-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px;
+  font-size: 0.85rem;
+  background: var(--color-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.yield-header,
+.yield-row {
+  display: contents;
+}
+
+.yield-header span {
+  background: var(--color-card-bg);
+  padding: 6px 10px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+.yield-row span {
+  background: var(--color-bg);
+  padding: 4px 10px;
+}
+
+.yield-row span:first-child {
+  font-weight: 500;
+}
+
+/* ---- Scale Factor ---- */
+
+.scale-article p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.scale-demo {
+  margin: var(--space-md) 0;
+}
+
+.scale-demo h5 {
+  font-size: 0.85rem;
+  margin-bottom: var(--space-xs);
+}
+
+.scale-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: var(--space-xs);
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 3px;
+}
+
+.scale-row:nth-child(even) {
+  background: var(--color-bg);
+}
+
+.scale-naive {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+.scale-correct {
+  font-weight: 600;
+}
+
+.scale-err {
+  color: var(--color-text-muted);
+}
+
+.scale-err.significant {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.scale-size {
+  font-weight: 500;
+}
+
+/* ---- Symmetry Table ---- */
+
+.sym-table {
+  font-size: 0.85rem;
+}
+
+.sym-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 2fr;
+  gap: var(--space-sm);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sym-row:last-child {
+  border-bottom: none;
+}
+
+.sym-name {
+  font-weight: 700;
+  font-family: var(--font-mono, monospace);
+}
+
+.sym-desc {
+  color: var(--color-text-muted);
+}
+
+.sym-blocks {
+  font-size: 0.8rem;
+}
+
+/* ---- Tessellation Table ---- */
+
+.tess-table {
+  font-size: 0.85rem;
+}
+
+.tess-row {
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  gap: var(--space-sm);
+  padding: 6px 8px;
+  border-radius: 3px;
+}
+
+.tess-yes {
+  background: color-mix(in srgb, #2d8b4e 10%, transparent);
+}
+
+.tess-no {
+  background: color-mix(in srgb, #c0392b 8%, transparent);
+}
+
+/* ---- Perimeter vs Area ---- */
+
+.pva-demo {
+  font-size: 0.85rem;
+}
+
+.pva-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-sm);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pva-row:last-child {
+  border-bottom: none;
+}
+
+/* ---- Expandable sections ---- */
+
+.calc-section.expandable {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: var(--space-sm) var(--space-md);
+}
+
+.calc-section.expandable summary {
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+}
+
+.calc-section.expandable summary::-webkit-details-marker {
+  display: none;
+}
+
+.calc-section.expandable summary h4::before {
+  content: '\25b6';
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+}
+
+.calc-section.expandable[open] summary h4::before {
+  transform: rotate(90deg);
+}
+
+.calc-section.expandable > .calc-card {
+  margin-top: var(--space-sm);
+  border: none;
+  padding: 0;
+}
+
+/* ---- Coordinate Geometry ---- */
+
+.coord-demo dl {
+  margin-top: var(--space-xs);
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 768px) {
+  .planner-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .planner-setup {
+    position: static;
+  }
+
+  .block-palette-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  }
+
+  .calc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scale-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sym-row {
+    grid-template-columns: 50px 1fr;
+  }
+
+  .sym-blocks {
+    grid-column: 1 / -1;
+  }
+}

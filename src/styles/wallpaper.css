@@ -1,0 +1,195 @@
+/* =============================================
+   17 Wallpaper Groups Page
+   ============================================= */
+
+.wallpaper-intro {
+  max-width: 60ch;
+  margin-bottom: var(--space-xl);
+}
+
+.wallpaper-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-md);
+}
+
+.wallpaper-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.wallpaper-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.wallpaper-pattern {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.wallpaper-info {
+  padding: var(--space-sm);
+}
+
+.wallpaper-name {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.wallpaper-orbifold {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-accent-dark);
+  margin-bottom: 0.4rem;
+}
+
+.wallpaper-desc {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.4rem;
+  line-height: 1.5;
+}
+
+.wallpaper-quilt-example {
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+  font-style: italic;
+}
+
+/* ---- Wallpaper pattern CSS illustrations ---- */
+
+.wp-p1 {
+  background:
+    linear-gradient(30deg, #c0392b 12%, transparent 12%) 0 0 / 40px 40px,
+    linear-gradient(30deg, #2c6e8a 12%, transparent 12%) 10px 20px / 40px 40px,
+    #f5f0e8;
+}
+
+.wp-p2 {
+  background:
+    linear-gradient(45deg, #8e44ad 25%, transparent 25%) 0 0 / 30px 30px,
+    linear-gradient(-45deg, #8e44ad 25%, transparent 25%) 0 0 / 30px 30px,
+    #f5f0e8;
+}
+
+.wp-pm {
+  background: repeating-linear-gradient(
+    0deg,
+    #c0392b 0px, #c0392b 4px,
+    #f5e6c8 4px, #f5e6c8 8px,
+    #2c6e8a 8px, #2c6e8a 12px,
+    #f5e6c8 12px, #f5e6c8 16px
+  );
+}
+
+.wp-pg {
+  background:
+    repeating-linear-gradient(0deg, transparent 0px, transparent 18px, #c0392b 18px, #c0392b 20px),
+    repeating-linear-gradient(90deg, #f5e6c8 0px, #f5e6c8 10px, #e8dcc8 10px, #e8dcc8 20px);
+}
+
+.wp-cm {
+  background:
+    linear-gradient(60deg, transparent 45%, #2c6e8a 45% 55%, transparent 55%) 0 0 / 30px 52px,
+    linear-gradient(-60deg, transparent 45%, #2c6e8a 45% 55%, transparent 55%) 0 0 / 30px 52px,
+    #f5e6c8;
+}
+
+.wp-pmm {
+  background:
+    linear-gradient(0deg, #c0392b 2px, transparent 2px) 0 0 / 30px 30px,
+    linear-gradient(90deg, #c0392b 2px, transparent 2px) 0 0 / 30px 30px,
+    linear-gradient(45deg, #d4a017 25%, transparent 25%) 0 0 / 30px 30px,
+    linear-gradient(-45deg, #d4a017 25%, transparent 25%) 0 0 / 30px 30px,
+    #f5f0e8;
+}
+
+.wp-pmg {
+  background:
+    repeating-linear-gradient(90deg, transparent 0px, transparent 14px, #8e44ad 14px, #8e44ad 16px),
+    linear-gradient(to right, #f0e4d0 50%, #e0d4c0 50%) 0 0 / 30px 20px,
+    linear-gradient(to right, #e0d4c0 50%, #f0e4d0 50%) 0 20px / 30px 20px;
+}
+
+.wp-pgg {
+  background:
+    linear-gradient(45deg, transparent 40%, #2c6e8a 40% 44%, transparent 44%) 0 0 / 24px 24px,
+    linear-gradient(-45deg, transparent 40%, #2c6e8a 40% 44%, transparent 44%) 0 12px / 24px 24px,
+    #f5e6c8;
+}
+
+.wp-cmm {
+  background:
+    linear-gradient(60deg, transparent 42%, #c0392b 42% 46%, transparent 46%) 0 0 / 20px 35px,
+    linear-gradient(-60deg, transparent 42%, #c0392b 42% 46%, transparent 46%) 0 0 / 20px 35px,
+    linear-gradient(0deg, #d4a017 2px, transparent 2px) 0 0 / 20px 35px,
+    #f5e6c8;
+}
+
+.wp-p4 {
+  background:
+    linear-gradient(to bottom right, #c0392b 50%, transparent 50%) 0 0 / 25px 25px,
+    linear-gradient(to top left, #8e44ad 50%, transparent 50%) 0 0 / 25px 25px,
+    #f5f0e8;
+}
+
+.wp-p4m {
+  background:
+    linear-gradient(45deg, #c0392b 25%, transparent 25%) 0 0 / 30px 30px,
+    linear-gradient(-45deg, #c0392b 25%, transparent 25%) 0 0 / 30px 30px,
+    linear-gradient(135deg, #c0392b 25%, transparent 25%) 0 0 / 30px 30px,
+    linear-gradient(-135deg, #c0392b 25%, transparent 25%) 0 0 / 30px 30px,
+    #f5e6c8;
+}
+
+.wp-p4g {
+  background:
+    linear-gradient(45deg, #2c6e8a 25%, transparent 25%) 0 0 / 30px 30px,
+    linear-gradient(-45deg, #2c6e8a 25%, transparent 25%) 15px 0 / 30px 30px,
+    linear-gradient(135deg, #d4a017 25%, transparent 25%) 0 15px / 30px 30px,
+    linear-gradient(-135deg, #d4a017 25%, transparent 25%) 15px 15px / 30px 30px,
+    #f5f0e8;
+}
+
+.wp-p3 {
+  background:
+    conic-gradient(from 0deg at 50% 66%, #c0392b 0deg 120deg, #2c6e8a 120deg 240deg, #d4a017 240deg 360deg)
+    0 0 / 40px 46px;
+}
+
+.wp-p3m1 {
+  background:
+    linear-gradient(60deg, transparent 47%, #c0392b 47% 53%, transparent 53%) 0 0 / 30px 52px,
+    linear-gradient(-60deg, transparent 47%, #c0392b 47% 53%, transparent 53%) 0 0 / 30px 52px,
+    linear-gradient(0deg, transparent 47%, #c0392b 47% 53%, transparent 53%) 0 0 / 30px 52px,
+    #f5e6c8;
+}
+
+.wp-p31m {
+  background:
+    linear-gradient(60deg, transparent 45%, #8e44ad 45% 55%, transparent 55%) 0 0 / 26px 45px,
+    linear-gradient(-60deg, transparent 45%, #8e44ad 45% 55%, transparent 55%) 13px 0 / 26px 45px,
+    #f0e4d0;
+}
+
+.wp-p6 {
+  background:
+    conic-gradient(from 0deg at 50% 58%, #c0392b 0deg 60deg, #f5e6c8 60deg 120deg, #2c6e8a 120deg 180deg, #f5e6c8 180deg 240deg, #d4a017 240deg 300deg, #f5e6c8 300deg)
+    0 0 / 36px 42px;
+}
+
+.wp-p6m {
+  background:
+    linear-gradient(60deg, transparent 44%, #c0392b 44% 48%, transparent 48%) 0 0 / 20px 35px,
+    linear-gradient(-60deg, transparent 44%, #c0392b 44% 48%, transparent 48%) 0 0 / 20px 35px,
+    linear-gradient(0deg, transparent 44%, #2c6e8a 44% 48%, transparent 48%) 0 0 / 20px 35px,
+    linear-gradient(90deg, transparent 44%, #d4a017 44% 48%, transparent 48%) 0 0 / 20px 35px,
+    #f5e6c8;
+}
