@@ -628,8 +628,8 @@ export function renderQuiltPlanner(container) {
               ${state.sashingWidth ? 'background:var(--color-border);padding:2px;' : ''}
             ">
               ${state.plan ? state.plan.flat().map((cell, i) => {
-                const blockId = cell ? cell.blockId : (state.selectedBlock || '');
-                return `<div class="grid-cell quilt-block quilt-block--${blockId}" data-idx="${i}"></div>`;
+                const cls = cell ? ` quilt-block quilt-block--${cell.blockId}` : '';
+                return `<div class="grid-cell${cls}" data-idx="${i}"></div>`;
               }).join('') : ''}
             </div>
           </div>
@@ -830,16 +830,14 @@ export function renderQuiltPlanner(container) {
     });
 
     // Render grid cells
-    if (state.selectedBlock) {
+    if (state.plan && est) {
       container.querySelectorAll('.grid-cell').forEach(el => {
         const idx = +el.dataset.idx;
         const row = state.plan[Math.floor(idx / est.grid.cols)];
         const cell = row ? row[idx % est.grid.cols] : null;
-        const blockId = cell ? cell.blockId : null;
-        if (blockId && BLOCK_BUILDERS[blockId]) {
-          BLOCK_BUILDERS[blockId](el);
-          applyPalette(el, cell.paletteId || state.palette);
-        }
+        if (!cell) return;
+        if (BLOCK_BUILDERS[cell.blockId]) BLOCK_BUILDERS[cell.blockId](el);
+        applyPalette(el, cell.paletteId || state.palette);
       });
     }
 
