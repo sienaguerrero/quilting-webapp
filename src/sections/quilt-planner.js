@@ -176,8 +176,6 @@ const BLOCK_REGISTRY = {
 // ============================================
 
 const TrigCalc = {
-  // HST: diagonal = side * sqrt(2). The 7/8" seam constant comes from
-  // bias-cut seam allowance: 2 * 0.25 * sqrt(2) ≈ 0.707, rounded to 0.875
   hstCutSize(finished) {
     return finished + 0.875;
   },
@@ -191,14 +189,12 @@ const TrigCalc = {
     return finished + 2 * SEAM_ALLOWANCE;
   },
 
-  // No-waste flying geese: 1 large square + 4 small → 4 units
-  // Each unit is W x H where W = 2H
-  flyingGeeseLargeCut(finishedHeight) {
-    return finishedHeight + 1.25;
+  flyingGeeseLargeCut(finishedWidth) {
+    return finishedWidth + 1.25;
   },
 
-  flyingGeeseSmallCut(finishedHeight) {
-    return finishedHeight / 2 + 0.875;
+  flyingGeeseSmallCut(finishedWidth) {
+    return finishedWidth / 2 + 0.875;
   },
 
   // On-point setting triangles
@@ -650,7 +646,7 @@ export function renderQuiltPlanner(container) {
                 <div class="calc-label">Half-Square Triangle</div>
                 <div class="calc-formula">cut = finished + ⅞″</div>
                 <div class="calc-result">${bs}″ block → cut <strong>${frac(TrigCalc.hstCutSize(bs))}″</strong></div>
-                <div class="calc-note">Bias seam loss ≈ 2 × ¼″ × √2 ≈ 0.707″, rounded to ⅞″</div>
+                <div class="calc-note">Two straight seams (½″) plus one bias seam (¼″ × √2 ≈ 0.354″) ≈ 0.854″, rounded up to ⅞″</div>
               </div>
 
               <div class="calc-card">
@@ -661,8 +657,8 @@ export function renderQuiltPlanner(container) {
 
               <div class="calc-card">
                 <div class="calc-label">Flying Geese (no-waste)</div>
-                <div class="calc-formula">lg = height + 1¼″, sm = (height ÷ 2) + ⅞″</div>
-                <div class="calc-result">${bs}″ height → lg <strong>${frac(TrigCalc.flyingGeeseLargeCut(bs))}″</strong>, sm <strong>${frac(TrigCalc.flyingGeeseSmallCut(bs))}″</strong></div>
+                <div class="calc-formula">lg = width + 1¼″, sm = (width ÷ 2) + ⅞″</div>
+                <div class="calc-result">${bs}″ × ${bs / 2}″ unit → lg <strong>${frac(TrigCalc.flyingGeeseLargeCut(bs))}″</strong>, sm <strong>${frac(TrigCalc.flyingGeeseSmallCut(bs))}″</strong></div>
               </div>
 
               <div class="calc-card">
