@@ -327,7 +327,18 @@ const YardageCalc = {
 const ColorBalance = {
   distribute(totalBlocks, ratios = [60, 30, 10]) {
     const sum = ratios.reduce((a, b) => a + b, 0);
-    return ratios.map(r => Math.round(totalBlocks * r / sum));
+    const exact = ratios.map(r => totalBlocks * r / sum);
+    const counts = exact.map(Math.floor);
+    let remaining = totalBlocks - counts.reduce((a, b) => a + b, 0);
+    const byRemainder = exact
+      .map((x, i) => [x - counts[i], i])
+      .sort((a, b) => b[0] - a[0] || a[1] - b[1]);
+    for (const [, i] of byRemainder) {
+      if (remaining <= 0) break;
+      counts[i] += 1;
+      remaining -= 1;
+    }
+    return counts;
   },
 
   actualPercentages(counts) {
