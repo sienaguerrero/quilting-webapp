@@ -335,10 +335,7 @@ const BLOCK_BUILDERS = {
 
 export function buildBlockPattern(el, blockId) {
   const builder = BLOCK_BUILDERS[blockId];
-  if (builder) {
-    el.classList.add('qb-rendered');
-    builder(el);
-  }
+  if (builder) builder(el);
 }
 
 export function applyPalette(el, paletteId) {
