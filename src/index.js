@@ -32,12 +32,12 @@ function initRouter() {
 }
 
 function handleRoute() {
-  const hash = window.location.hash.slice(1) || 'home';
+  const requested = window.location.hash.slice(1) || 'home';
   const sections = document.querySelectorAll('.section');
   const links = document.querySelectorAll('.nav-link');
 
-  if (hash.startsWith('block/')) {
-    const blockId = hash.split('/')[1];
+  if (requested.startsWith('block/')) {
+    const blockId = requested.split('/')[1];
     sections.forEach(s => s.classList.remove('active'));
     document.getElementById('block-detail').classList.add('active');
     renderBlockDetail(document.getElementById('block-detail'), blockId);
@@ -47,6 +47,9 @@ function handleRoute() {
     window.scrollTo(0, 0);
     return;
   }
+
+  const known = Array.from(links).some(l => l.dataset.section === requested);
+  const hash = known ? requested : 'home';
 
   sections.forEach(s => {
     s.classList.toggle('active', s.id === hash);
