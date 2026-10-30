@@ -160,7 +160,8 @@ h3 {
   margin-bottom: var(--space-sm);
 }
 
-h4 {
+h4,
+.eyebrow {
   font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 600;
@@ -173,6 +174,11 @@ h4 {
 p {
   margin-bottom: var(--space-md);
   max-width: 65ch;
+}
+
+p.eyebrow {
+  max-width: none;
+  margin-bottom: var(--space-xs);
 }
 
 /* ---- Hero ---- */

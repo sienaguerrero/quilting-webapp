@@ -1,7 +1,7 @@
 export function renderHistory(container) {
   container.innerHTML = `
     <div class="section-header">
-      <h4>History</h4>
+      <p class="eyebrow">History</p>
       <h2>A Thread Through Time</h2>
       <p>From ancient Egypt to the Andes, quilting has been a universal human impulse — layering cloth for warmth, beauty, and meaning.</p>
     </div>

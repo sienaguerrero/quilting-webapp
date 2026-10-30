@@ -433,7 +433,7 @@ The registration challenge, aligning resist-dyed threads on the loom, is fundame
 export function renderBlocks(container) {
   container.innerHTML = `
     <div class="section-header">
-      <h4>Quilt Blocks</h4>
+      <p class="eyebrow">Quilt Blocks</p>
       <h2>A Pattern Library</h2>
       <p>Twelve classic American blocks and four Andean-inspired patterns — two traditions that independently arrived at similar geometric structures from opposite hemispheres.</p>
     </div>
@@ -516,7 +516,7 @@ export function renderBlockDetail(container, blockId) {
         <div id="detail-picker-mount"></div>
       </div>
       <div>
-        <h4>${block.origin} · ${block.era}</h4>
+        <p class="eyebrow">${block.origin} · ${block.era}</p>
         <h2>${block.name}</h2>
         <p>${block.summary}</p>
         <div class="card-meta">
