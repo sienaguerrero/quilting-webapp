@@ -123,7 +123,7 @@ const WALLPAPER_GROUPS = [
 export function renderWallpaperGroups(container) {
   container.innerHTML = `
     <div class="section-header">
-      <h4>Symmetry</h4>
+      <p class="eyebrow">Symmetry</p>
       <h2>The 17 Wallpaper Groups</h2>
       <p>Mathematically, there are exactly 17 possible repeating planar symmetry patterns. Quilters independently discovered all of them.</p>
     </div>
