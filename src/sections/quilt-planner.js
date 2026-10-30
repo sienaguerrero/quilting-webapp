@@ -513,7 +513,16 @@ export function renderQuiltPlanner(container) {
     render();
   }
 
+  function focusSelector(el) {
+    if (!el || !container.contains(el)) return null;
+    if (el.id) return `#${el.id}`;
+    if (el.dataset.block) return `.palette-block[data-block="${el.dataset.block}"]`;
+    if (el.dataset.idx) return `.grid-cell[data-idx="${el.dataset.idx}"]`;
+    return null;
+  }
+
   function render() {
+    const focused = focusSelector(document.activeElement);
     const est = LayoutEngine.estimateMaterials(
       state.bedSize, state.blockSize, state.sashingWidth, state.borderWidth
     );
@@ -629,7 +638,10 @@ export function renderQuiltPlanner(container) {
             ">
               ${state.plan ? state.plan.flat().map((cell, i) => {
                 const blockId = cell ? cell.blockId : (state.selectedBlock || '');
-                return `<div class="grid-cell quilt-block quilt-block--${blockId}" data-idx="${i}"></div>`;
+                const r = Math.floor(i / est.grid.cols) + 1;
+                const c = (i % est.grid.cols) + 1;
+                const label = cell ? BLOCK_REGISTRY[cell.blockId].name : 'empty';
+                return `<button type="button" class="grid-cell quilt-block quilt-block--${blockId}" data-idx="${i}" aria-label="Row ${r}, column ${c}: ${label}"></button>`;
               }).join('') : ''}
             </div>
           </div>
@@ -869,6 +881,11 @@ export function renderQuiltPlanner(container) {
         render();
       });
     });
+
+    if (focused) {
+      const el = container.querySelector(focused);
+      if (el) el.focus({ preventScroll: true });
+    }
   }
 
   render();
