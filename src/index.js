@@ -1,3 +1,4 @@
+import './styles/fonts.css';
 import './styles/main.css';
 import './styles/quilt-patterns.css';
 import './styles/geometry.css';
