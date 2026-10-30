@@ -19,7 +19,6 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      title: 'The Geometry of Cloth',
     }),
   ],
   devServer: {

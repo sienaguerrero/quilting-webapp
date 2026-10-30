@@ -239,24 +239,6 @@ const TrigCalc = {
 // ============================================
 
 const ScaleFactor = {
-  factor(originalSize, newSize) {
-    return newSize / originalSize;
-  },
-
-  scaleLinear(dim, k) {
-    return dim * k;
-  },
-
-  scaleArea(area, k) {
-    return area * k ** 2;
-  },
-
-  // Key insight: seam allowances are FIXED, they don't scale.
-  // Naive scaling of cut sizes produces wrong results.
-  scaleCutSize(finishedDim, k, seamConstant) {
-    return (finishedDim * k) + seamConstant;
-  },
-
   compareScaling(originalFinished, originalCut, k) {
     const naiveScaled = originalCut * k;
     const seamConstant = originalCut - originalFinished;
@@ -265,16 +247,6 @@ const ScaleFactor = {
       naive: naiveScaled,
       correct: correctScaled,
       error: Math.abs(naiveScaled - correctScaled),
-    };
-  },
-
-  fabricComparison(originalSize, newSize, blockCount) {
-    const k = newSize / originalSize;
-    return {
-      k,
-      areaRatio: k ** 2,
-      originalTotal: originalSize ** 2 * blockCount,
-      newTotal: newSize ** 2 * blockCount,
     };
   },
 };
@@ -290,12 +262,6 @@ const YardageCalc = {
 
   squaresFromFatQuarter(squareSize) {
     return this.squaresFromFabric(squareSize, FAT_QUARTER.width, FAT_QUARTER.length);
-  },
-
-  yardageForSquares(count, squareSize, fabricWidth = FABRIC_WIDTH) {
-    const perRow = Math.floor(fabricWidth / squareSize);
-    const rows = Math.ceil(count / perRow);
-    return (rows * squareSize) / 36;
   },
 
   bindingLength(quiltWidth, quiltLength) {
@@ -365,14 +331,6 @@ const Tessellation = {
     return (sides - 2) * 180 / sides;
   },
 
-  tilesPlane(sides) {
-    return 360 % this.interiorAngle(sides) === 0;
-  },
-
-  vertexCount(sides) {
-    return 360 / this.interiorAngle(sides);
-  },
-
   polygons: [
     { sides: 3, name: 'Triangle',  angle: 60,  tiles: true,  atVertex: 6 },
     { sides: 4, name: 'Square',    angle: 90,  tiles: true,  atVertex: 4 },
@@ -400,14 +358,6 @@ const CoordinateGeometry = {
     return {
       sides: 2 * (cols + rows - 2),
       corners: 4,
-    };
-  },
-
-  gridToOnPoint(col, row, blockSize) {
-    const d = blockSize * Math.SQRT2;
-    return {
-      x: (col - row) * d / 2,
-      y: (col + row) * d / 2,
     };
   },
 };
@@ -469,15 +419,6 @@ const LayoutEngine = {
   placeBlock(plan, row, col, blockId, paletteId = 'traditional', rotation = 0) {
     if (row >= 0 && row < plan.length && col >= 0 && col < plan[0].length) {
       plan[row][col] = { blockId, paletteId, rotation };
-    }
-    return plan;
-  },
-
-  fillPlan(plan, blockId, paletteId = 'traditional') {
-    for (const row of plan) {
-      for (let c = 0; c < row.length; c++) {
-        row[c] = { blockId, paletteId, rotation: 0 };
-      }
     }
     return plan;
   },
@@ -873,11 +814,3 @@ export function renderQuiltPlanner(container) {
 
   render();
 }
-
-export {
-  BED_SIZES, BLOCK_SIZES, FABRIC_WIDTH, FAT_QUARTER, SEAM_ALLOWANCE,
-  BLOCK_REGISTRY,
-  TrigCalc, ScaleFactor, YardageCalc, ColorBalance,
-  Symmetry, Tessellation, CoordinateGeometry, PerimeterVsArea,
-  LayoutEngine,
-};
