@@ -7,6 +7,7 @@ import './styles/quilt-planner.css';
 import { renderHistory } from './sections/history';
 import { renderTechniques } from './sections/techniques';
 import { renderBlocks, renderBlockDetail } from './sections/blocks';
+import { buildBlockPattern } from './sections/block-patterns';
 import { renderGeometry } from './sections/geometry';
 import { renderWallpaperGroups } from './sections/wallpaper-groups';
 import { initEasterEggs } from './sections/easter-eggs';
@@ -71,6 +72,7 @@ function buildHeroGrid() {
   patterns.forEach(p => {
     const cell = document.createElement('div');
     cell.className = `hero-cell quilt-block quilt-block--${p}`;
+    buildBlockPattern(cell, p);
     grid.appendChild(cell);
   });
 }
