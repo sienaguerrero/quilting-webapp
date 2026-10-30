@@ -1,0 +1,16 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      webpack:
+        patterns:
+          - "webpack*"
+          - "*-loader"
+          - "html-webpack-plugin"
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
