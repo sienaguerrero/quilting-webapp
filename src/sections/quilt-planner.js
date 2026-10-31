@@ -521,8 +521,25 @@ export function renderQuiltPlanner(container) {
     return null;
   }
 
+  function cellLabel(idx, cell, cols) {
+    const r = Math.floor(idx / cols) + 1;
+    const c = (idx % cols) + 1;
+    return `Row ${r}, column ${c}: ${cell ? BLOCK_REGISTRY[cell.blockId].name : 'empty'}`;
+  }
+
+  function renderCell(el, cell, cols) {
+    el.className = `grid-cell quilt-block${cell ? ` quilt-block--${cell.blockId}` : ''}`;
+    el.setAttribute('aria-label', cellLabel(+el.dataset.idx, cell, cols));
+    el.removeAttribute('style');
+    el.innerHTML = '';
+    if (!cell) return;
+    if (BLOCK_BUILDERS[cell.blockId]) BLOCK_BUILDERS[cell.blockId](el);
+    applyPalette(el, cell.paletteId || state.palette);
+  }
+
   function render() {
     const focused = focusSelector(document.activeElement);
+    const openSections = Array.from(container.querySelectorAll('details'), d => d.open);
     const est = LayoutEngine.estimateMaterials(
       state.bedSize, state.blockSize, state.sashingWidth, state.borderWidth
     );
@@ -636,13 +653,9 @@ export function renderQuiltPlanner(container) {
               aspect-ratio:${est.grid.actualWidth}/${est.grid.actualLength};
               ${state.sashingWidth ? 'background:var(--color-border);padding:2px;' : ''}
             ">
-              ${state.plan ? state.plan.flat().map((cell, i) => {
-                const blockId = cell ? cell.blockId : (state.selectedBlock || '');
-                const r = Math.floor(i / est.grid.cols) + 1;
-                const c = (i % est.grid.cols) + 1;
-                const label = cell ? BLOCK_REGISTRY[cell.blockId].name : 'empty';
-                return `<button type="button" class="grid-cell quilt-block quilt-block--${blockId}" data-idx="${i}" aria-label="Row ${r}, column ${c}: ${label}"></button>`;
-              }).join('') : ''}
+              ${state.plan ? state.plan.flat().map((cell, i) =>
+                `<button type="button" class="grid-cell quilt-block${cell ? ` quilt-block--${cell.blockId}` : ''}" data-idx="${i}" aria-label="${cellLabel(i, cell, est.grid.cols)}"></button>`
+              ).join('') : ''}
             </div>
           </div>
           <p class="grid-hint">${state.selectedBlock ? 'Click cells to place blocks' : 'Select a block from the palette above'}</p>
@@ -842,18 +855,16 @@ export function renderQuiltPlanner(container) {
     });
 
     // Render grid cells
-    if (state.selectedBlock) {
-      container.querySelectorAll('.grid-cell').forEach(el => {
-        const idx = +el.dataset.idx;
-        const row = state.plan[Math.floor(idx / est.grid.cols)];
-        const cell = row ? row[idx % est.grid.cols] : null;
-        const blockId = cell ? cell.blockId : null;
-        if (blockId && BLOCK_BUILDERS[blockId]) {
-          BLOCK_BUILDERS[blockId](el);
-          applyPalette(el, cell.paletteId || state.palette);
-        }
-      });
-    }
+    container.querySelectorAll('.grid-cell').forEach(el => {
+      const idx = +el.dataset.idx;
+      const row = state.plan[Math.floor(idx / est.grid.cols)];
+      const cell = row ? row[idx % est.grid.cols] : null;
+      if (cell) renderCell(el, cell, est.grid.cols);
+    });
+
+    container.querySelectorAll('details').forEach((d, i) => {
+      if (i < openSections.length) d.open = openSections[i];
+    });
 
     // Event listeners
     const on = (id, evt, fn) => {
@@ -865,10 +876,18 @@ export function renderQuiltPlanner(container) {
     on('#pl-block', 'change', e => update({ blockSize: +e.target.value, plan: null }));
     on('#pl-sash', 'change', e => update({ sashingWidth: +e.target.value, plan: null }));
     on('#pl-border', 'change', e => update({ borderWidth: +e.target.value, plan: null }));
-    on('#pl-palette', 'change', e => update({ palette: e.target.value }));
+    on('#pl-palette', 'change', e => {
+      state.palette = e.target.value;
+      container.querySelectorAll('.palette-preview').forEach(el => applyPalette(el, state.palette));
+    });
 
     container.querySelectorAll('.palette-block').forEach(btn => {
-      btn.addEventListener('click', () => update({ selectedBlock: btn.dataset.block }));
+      btn.addEventListener('click', () => {
+        state.selectedBlock = btn.dataset.block;
+        container.querySelectorAll('.palette-block').forEach(b => b.classList.toggle('selected', b === btn));
+        const hint = container.querySelector('.grid-hint');
+        if (hint) hint.textContent = 'Click cells to place blocks';
+      });
     });
 
     container.querySelectorAll('.grid-cell').forEach(el => {
@@ -878,7 +897,7 @@ export function renderQuiltPlanner(container) {
         const r = Math.floor(idx / est.grid.cols);
         const c = idx % est.grid.cols;
         LayoutEngine.placeBlock(state.plan, r, c, state.selectedBlock, state.palette);
-        render();
+        renderCell(el, state.plan[r][c], est.grid.cols);
       });
     });
 
