@@ -1,5 +1,5 @@
 import { buildBlockPattern, applyPalette, buildFabricPicker } from './block-patterns';
-import { CSS_SNIPPETS } from './block-css-snippets';
+import { CSS_SNIPPETS, snippetDemoHtml } from './block-css-snippets';
 
 const BLOCKS = [
   {
@@ -544,6 +544,7 @@ export function renderBlockDetail(container, blockId) {
       ${CSS_SNIPPETS[block.id] ? `
         <h3>CSS Code</h3>
         <div class="css-snippet">
+          ${snippetDemoHtml(block.id)}
           <pre><code>${CSS_SNIPPETS[block.id].replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>
         </div>
       ` : ''}

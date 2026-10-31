@@ -25,102 +25,63 @@ export const CSS_SNIPPETS = {
   'nine-patch': `.nine-patch {
   background:
     conic-gradient(
-      #c0392b 25%, #f5d6a8 25% 50%,
-      #c0392b 50% 75%, #f5d6a8 75%
-    ) 0 0 / 33.33% 33.33%;
+      #f5d6a8 25%, #c0392b 25% 50%,
+      #f5d6a8 50% 75%, #c0392b 75%
+    ) 0 0 / 66.67% 66.67%;
   aspect-ratio: 1;
 }`,
 
   'flying-geese': `.flying-geese {
   --goose: #2c6e8a;
   --sky: #e8dcc8;
-  background: var(--sky);
-  position: relative;
-}
-
-.flying-geese::before {
-  content: '';
-  position: absolute;
-  inset: 0;
   background:
     linear-gradient(to bottom right,
-      var(--goose) 50%, transparent 50%)
-      0 0 / 50% 25% no-repeat,
+      var(--sky) 50%, var(--goose) 50%)
+      0 0 / 50% 25% repeat-y,
     linear-gradient(to bottom left,
-      var(--goose) 50%, transparent 50%)
-      50% 0 / 50% 25% no-repeat,
-    linear-gradient(to bottom right,
-      var(--goose) 50%, transparent 50%)
-      0 25% / 50% 25% no-repeat,
-    linear-gradient(to bottom left,
-      var(--goose) 50%, transparent 50%)
-      50% 25% / 50% 25% no-repeat,
-    linear-gradient(to bottom right,
-      var(--goose) 50%, transparent 50%)
-      0 50% / 50% 25% no-repeat,
-    linear-gradient(to bottom left,
-      var(--goose) 50%, transparent 50%)
-      50% 50% / 50% 25% no-repeat,
-    linear-gradient(to bottom right,
-      var(--goose) 50%, transparent 50%)
-      0 75% / 50% 25% no-repeat,
-    linear-gradient(to bottom left,
-      var(--goose) 50%, transparent 50%)
-      50% 75% / 50% 25% no-repeat;
+      var(--sky) 50%, var(--goose) 50%)
+      100% 0 / 50% 25% repeat-y;
+  aspect-ratio: 1;
 }`,
 
   'pinwheel': `.pinwheel {
   --c1: #8e44ad;
   --c2: #f0e4d0;
   background:
-    linear-gradient(to bottom right,
-      var(--c1) 50%, var(--c2) 50%)
-      0 0 / 50% 50% no-repeat,
-    linear-gradient(to bottom left,
-      var(--c2) 50%, var(--c1) 50%)
-      50% 0 / 50% 50% no-repeat,
     linear-gradient(to top right,
       var(--c2) 50%, var(--c1) 50%)
-      0 50% / 50% 50% no-repeat,
+      0 0 / 50% 50% no-repeat,
+    linear-gradient(to bottom right,
+      var(--c2) 50%, var(--c1) 50%)
+      100% 0 / 50% 50% no-repeat,
     linear-gradient(to top left,
-      var(--c1) 50%, var(--c2) 50%)
-      50% 50% / 50% 50% no-repeat;
+      var(--c2) 50%, var(--c1) 50%)
+      0 100% / 50% 50% no-repeat,
+    linear-gradient(to bottom left,
+      var(--c2) 50%, var(--c1) 50%)
+      100% 100% / 50% 50% no-repeat;
   aspect-ratio: 1;
 }`,
 
   'ohio-star': `.ohio-star {
   --star: #c0392b;
   --bg: #f5e6c8;
+  /* QST unit: two opposite quarter triangles */
+  --points-lr: conic-gradient(from 45deg,
+      var(--star) 0 90deg, transparent 90deg 180deg,
+      var(--star) 180deg 270deg, transparent 270deg);
+  --points-tb: conic-gradient(from 315deg,
+      var(--star) 0 90deg, transparent 90deg 180deg,
+      var(--star) 180deg 270deg, transparent 270deg);
   background:
     /* center square */
     linear-gradient(var(--star), var(--star))
-      33.33% 33.33% / 33.34% 33.34% no-repeat,
-    /* corner triangles */
-    linear-gradient(to bottom right,
-      var(--star) 50%, transparent 50%)
-      0 0 / 33.33% 33.33% no-repeat,
-    linear-gradient(to bottom left,
-      var(--star) 50%, transparent 50%)
-      66.67% 0 / 33.33% 33.33% no-repeat,
-    linear-gradient(to top right,
-      var(--star) 50%, transparent 50%)
-      0 66.67% / 33.33% 33.33% no-repeat,
-    linear-gradient(to top left,
-      var(--star) 50%, transparent 50%)
-      66.67% 66.67% / 33.33% 33.33% no-repeat,
-    /* QST side points */
-    linear-gradient(to bottom left,
-      transparent 50%, var(--star) 50%)
-      0 33.33% / 33.33% 33.34% no-repeat,
-    linear-gradient(to bottom right,
-      transparent 50%, var(--star) 50%)
-      66.67% 33.33% / 33.33% 33.34% no-repeat,
-    linear-gradient(to top left,
-      transparent 50%, var(--star) 50%)
-      33.33% 0 / 33.34% 33.33% no-repeat,
-    linear-gradient(to top right,
-      transparent 50%, var(--star) 50%)
-      33.33% 66.67% / 33.34% 33.33% no-repeat,
+      50% 50% / 33.34% 33.34% no-repeat,
+    /* side units */
+    var(--points-lr) 50% 0 / 33.34% 33.34% no-repeat,
+    var(--points-lr) 50% 100% / 33.34% 33.34% no-repeat,
+    var(--points-tb) 0 50% / 33.34% 33.34% no-repeat,
+    var(--points-tb) 100% 50% / 33.34% 33.34% no-repeat,
     var(--bg);
   aspect-ratio: 1;
 }`,
@@ -149,27 +110,20 @@ export const CSS_SNIPPETS = {
   'drunkards-path': `.drunkards-path {
   --c1: #2c6e8a;
   --c2: #f5e6c8;
-  background: var(--c2);
-  position: relative;
-}
-
-.drunkards-path::before {
-  content: '';
-  position: absolute;
-  inset: 0;
   background:
-    radial-gradient(circle at   0%   0%,
-      var(--c1) 50%, transparent 50%)
+    radial-gradient(circle farthest-side at 100% 100%,
+      var(--c2) 65%, var(--c1) 65%)
       0 0 / 50% 50% no-repeat,
-    radial-gradient(circle at 100%   0%,
-      var(--c1) 50%, transparent 50%)
-      50% 0 / 50% 50% no-repeat,
-    radial-gradient(circle at   0% 100%,
-      var(--c1) 50%, transparent 50%)
-      0 50% / 50% 50% no-repeat,
-    radial-gradient(circle at 100% 100%,
-      var(--c1) 50%, transparent 50%)
-      50% 50% / 50% 50% no-repeat;
+    radial-gradient(circle farthest-side at 0% 100%,
+      var(--c2) 65%, var(--c1) 65%)
+      100% 0 / 50% 50% no-repeat,
+    radial-gradient(circle farthest-side at 100% 0%,
+      var(--c2) 65%, var(--c1) 65%)
+      0 100% / 50% 50% no-repeat,
+    radial-gradient(circle farthest-side at 0% 0%,
+      var(--c2) 65%, var(--c1) 65%)
+      100% 100% / 50% 50% no-repeat;
+  aspect-ratio: 1;
 }`,
 
   'sawtooth-star': `.sawtooth-star {
@@ -178,33 +132,21 @@ export const CSS_SNIPPETS = {
   background:
     /* center block */
     linear-gradient(var(--star), var(--star))
-      25% 25% / 50% 50% no-repeat,
-    /* corner triangles (the points) */
-    linear-gradient(to bottom right,
-      var(--star) 50%, transparent 50%)
-      0 0 / 25% 25% no-repeat,
-    linear-gradient(to bottom left,
-      var(--star) 50%, transparent 50%)
-      75% 0 / 25% 25% no-repeat,
-    linear-gradient(to top right,
-      var(--star) 50%, transparent 50%)
-      0 75% / 25% 25% no-repeat,
-    linear-gradient(to top left,
-      var(--star) 50%, transparent 50%)
-      75% 75% / 25% 25% no-repeat,
-    /* side wedges */
-    linear-gradient(to right,
-      transparent 50%, var(--star) 50%)
-      0 25% / 25% 50% no-repeat,
-    linear-gradient(to left,
-      transparent 50%, var(--star) 50%)
-      75% 25% / 25% 50% no-repeat,
-    linear-gradient(to bottom,
-      transparent 50%, var(--star) 50%)
-      25% 0 / 50% 25% no-repeat,
-    linear-gradient(to top,
-      transparent 50%, var(--star) 50%)
-      25% 75% / 50% 25% no-repeat,
+      50% 50% / 50% 50% no-repeat,
+    /* flying geese units: background goose,
+       star-colored sky triangles are the points */
+    conic-gradient(from 135deg at 50% 0,
+      transparent 0 90deg, var(--star) 90deg)
+      50% 0 / 50% 25% no-repeat,
+    conic-gradient(from 315deg at 50% 100%,
+      transparent 0 90deg, var(--star) 90deg)
+      50% 100% / 50% 25% no-repeat,
+    conic-gradient(from 45deg at 0 50%,
+      transparent 0 90deg, var(--star) 90deg)
+      0 50% / 25% 50% no-repeat,
+    conic-gradient(from 225deg at 100% 50%,
+      transparent 0 90deg, var(--star) 90deg)
+      100% 50% / 25% 50% no-repeat,
     var(--bg);
   aspect-ratio: 1;
 }`,
@@ -213,8 +155,11 @@ export const CSS_SNIPPETS = {
   --center: #c0392b;
   --ring: #f5d6a8;
   --bg: #f0e4d0;
+  --petal: radial-gradient(closest-side,
+      var(--ring) 99%, transparent);
   background: var(--bg);
   position: relative;
+  aspect-ratio: 1;
 }
 
 /* Center hexagon */
@@ -231,7 +176,7 @@ export const CSS_SNIPPETS = {
   );
 }
 
-/* Ring of 6 hexagons via radial-gradient */
+/* Ring of 6 petals (circles stand in for hexagons) */
 .flower-garden::after {
   content: '';
   position: absolute;
@@ -239,30 +184,17 @@ export const CSS_SNIPPETS = {
   width: 65%; height: 65%;
   transform: translate(-50%, -50%);
   background:
-    radial-gradient(circle,
-      var(--ring) 22%, transparent 22%)
-      50% 18% / 28% 28% no-repeat,
-    radial-gradient(circle,
-      var(--ring) 22%, transparent 22%)
-      78% 34% / 28% 28% no-repeat,
-    radial-gradient(circle,
-      var(--ring) 22%, transparent 22%)
-      78% 66% / 28% 28% no-repeat,
-    radial-gradient(circle,
-      var(--ring) 22%, transparent 22%)
-      50% 82% / 28% 28% no-repeat,
-    radial-gradient(circle,
-      var(--ring) 22%, transparent 22%)
-      22% 66% / 28% 28% no-repeat,
-    radial-gradient(circle,
-      var(--ring) 22%, transparent 22%)
-      22% 34% / 28% 28% no-repeat;
+    var(--petal) 91.7% 50% / 28% 28% no-repeat,
+    var(--petal) 70.8% 13.9% / 28% 28% no-repeat,
+    var(--petal) 29.2% 13.9% / 28% 28% no-repeat,
+    var(--petal) 8.3% 50% / 28% 28% no-repeat,
+    var(--petal) 29.2% 86.1% / 28% 28% no-repeat,
+    var(--petal) 70.8% 86.1% / 28% 28% no-repeat;
 }`,
 
   'jacobs-ladder': `.jacobs-ladder {
   --c1: #c0392b;
   --c2: #f5d6a8;
-  --bg: #f0e4d0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -273,8 +205,8 @@ export const CSS_SNIPPETS = {
 .jl-fp {
   background:
     conic-gradient(
-      var(--c1) 25%, var(--c2) 25% 50%,
-      var(--c1) 50% 75%, var(--c2) 75%
+      var(--c2) 25%, var(--c1) 25% 50%,
+      var(--c2) 50% 75%, var(--c1) 75%
     ) 0 0 / 50% 50%;
 }
 
@@ -282,7 +214,7 @@ export const CSS_SNIPPETS = {
 .jl-hst {
   background:
     linear-gradient(to bottom right,
-      var(--c1) 50%, var(--bg) 50%);
+      var(--c1) 50%, var(--c2) 50%);
 }`,
 
   'snails-trail': `.snails-trail {
@@ -309,3 +241,19 @@ export const CSS_SNIPPETS = {
       var(--c1) 50%, var(--c2) 50%);
 }`,
 };
+
+const DEMO_MARKUP = {
+  'bears-paw': null,
+  'jacobs-ladder': Array.from({ length: 9 }, (_, i) =>
+    `<div class="${(Math.floor(i / 3) + (i % 3)) % 2 === 0 ? 'jl-fp' : 'jl-hst'}"></div>`
+  ).join(''),
+};
+
+export function snippetDemoHtml(blockId) {
+  const css = CSS_SNIPPETS[blockId];
+  const inner = DEMO_MARKUP[blockId];
+  if (!css || inner === null) return '';
+  const root = css.match(/^\.([\w-]+)/m)[1];
+  const scoped = css.replace(/^\./gm, '.css-demo .');
+  return `<div class="css-demo"><style>${scoped}</style><div class="${root}">${inner || ''}</div></div>`;
+}
