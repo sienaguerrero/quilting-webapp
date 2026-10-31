@@ -1,6 +1,7 @@
 :root {
   --phi: 1.618033988749895;
   --phi-inv: 0.618033988749895;
+  --phi-inv-fr: 0.618033988749895fr;
 
   --color-accent: #A1B861;
   --color-accent-dark: #7a8f45;
@@ -179,7 +180,7 @@ p {
 
 .hero {
   display: grid;
-  grid-template-columns: var(--phi-inv)fr 1fr;
+  grid-template-columns: var(--phi-inv-fr) 1fr;
   gap: var(--space-2xl);
   align-items: center;
   min-height: calc(100vh - 8rem);
@@ -202,6 +203,7 @@ p {
   grid-template-columns: repeat(4, 1fr);
   gap: 4px;
   aspect-ratio: 1;
+  width: 100%;
   max-width: 400px;
   justify-self: end;
 }
@@ -331,13 +333,13 @@ p {
 
 .content-split {
   display: grid;
-  grid-template-columns: var(--phi-inv)fr 1fr;
+  grid-template-columns: var(--phi-inv-fr) 1fr;
   gap: var(--space-xl);
   margin-bottom: var(--space-xl);
 }
 
 .content-split--reverse {
-  grid-template-columns: 1fr var(--phi-inv)fr;
+  grid-template-columns: 1fr var(--phi-inv-fr);
 }
 
 /* ---- Block Detail ---- */
