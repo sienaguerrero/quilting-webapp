@@ -2,7 +2,7 @@ import './cutters.css';
 import { PIECES, FAMILY_ORDER, pieceById, shapeSvg, mm, BLOCK_MM } from './geometry';
 import { BLOCKS, DEFAULT_BLOCK } from './blocks';
 
-const files = require.context('./files', true, /\.(stl|scad|md|sh)$/);
+const files = require.context('./files', true, /\.(stl|scad|md|sh|txt)$/);
 const fileUrl = (rel) => files(`./${rel}`);
 const stlUrl = (id, part) => fileUrl(`stl-${BLOCK_MM}mm/${id}-${part}.stl`);
 
