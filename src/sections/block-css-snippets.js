@@ -126,7 +126,7 @@ export const CSS_SNIPPETS = {
 }`,
 
   'bears-paw': `.bears-paw {
-  /* Bear's Paw uses a 7x7 grid — too complex
+  /* Bear's Paw uses a 7x7 grid, too complex
      for pure gradients. Best approach: CSS Grid
      with clip-path triangles for the toe units. */
   display: grid;
@@ -278,7 +278,7 @@ export const CSS_SNIPPETS = {
     ) 0 0 / 50% 50%;
 }
 
-/* HST cells (sides) — all same diagonal */
+/* HST cells (sides), all same diagonal */
 .jl-hst {
   background:
     linear-gradient(to bottom right,
