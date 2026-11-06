@@ -169,25 +169,3 @@
     #1a1a4e 23px, #1a1a4e 29px
   );
 }
-
-/* ---- Symmetry demo ---- */
-
-.symmetry-demo {
-  display: grid;
-  grid-template-columns: repeat(4, 80px);
-  gap: var(--space-xs);
-  margin: var(--space-md) 0;
-}
-
-.symmetry-demo .quilt-block {
-  width: 80px;
-  height: 80px;
-}
-
-.sym-label {
-  font-size: 0.75rem;
-  font-family: var(--font-mono);
-  text-align: center;
-  color: var(--color-text-muted);
-  margin-top: 0.25rem;
-}

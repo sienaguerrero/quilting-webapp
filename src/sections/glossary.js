@@ -3,7 +3,7 @@ const GLOSSARY_TERMS = [
     term: 'HST',
     full: 'Half-Square Triangle',
     category: 'piecing',
-    definition: 'A square made of two right triangles sewn along the hypotenuse. The most fundamental pieced unit in quilting — used in Pinwheel, Bear\'s Paw, Sawtooth Star, and hundreds of other blocks.',
+    definition: 'A square made of two right triangles sewn along the hypotenuse. Used in Pinwheel, Bear\'s Paw, Sawtooth Star, and hundreds of other blocks.',
   },
   {
     term: 'QST',
@@ -15,7 +15,7 @@ const GLOSSARY_TERMS = [
     term: 'EPP',
     full: 'English Paper Piecing',
     category: 'piecing',
-    definition: 'A hand-sewing technique where fabric is basted over paper or cardboard templates, then whipstitched together. Produces extremely precise joins, especially for non-square shapes like hexagons. The technique dates to at least the early 18th century.',
+    definition: 'A hand-sewing technique where fabric is basted over paper or cardboard templates, then whipstitched together. Gives very precise joins, especially for non-square shapes like hexagons. The technique dates to at least the early 18th century.',
   },
   {
     term: 'FPP',
@@ -27,7 +27,7 @@ const GLOSSARY_TERMS = [
     term: 'Flying Geese',
     full: null,
     category: 'piecing',
-    definition: 'A rectangular unit (2:1 ratio) composed of a large center triangle flanked by two smaller triangles. One of the few directional units in quilting. Four Flying Geese around a center square form a Sawtooth Star.',
+    definition: 'A rectangular unit (2:1 ratio) composed of a large center triangle flanked by two smaller triangles. It points in one direction, which makes it popular for borders. Four Flying Geese around a center square form a Sawtooth Star.',
   },
   {
     term: 'Strip Piecing',
@@ -45,7 +45,7 @@ const GLOSSARY_TERMS = [
     term: 'Sashing',
     full: null,
     category: 'anatomy',
-    definition: 'Strips of fabric sewn between quilt blocks to separate and frame them. Creates a lattice or grid effect. Can be plain or pieced. Sashing with contrasting cornerstones is a hallmark of many traditional quilts.',
+    definition: 'Strips of fabric sewn between quilt blocks to separate and frame them. Creates a lattice or grid effect. Can be plain or pieced. Sashing with contrasting cornerstones is common in traditional quilts.',
   },
   {
     term: 'Cornerstones',
@@ -87,7 +87,7 @@ const GLOSSARY_TERMS = [
     term: 'Appliqué',
     full: null,
     category: 'construction',
-    definition: 'A technique where fabric shapes are sewn onto a background fabric. Allows curved and organic designs impossible with piecing alone. Can be done by hand (needle-turn) or machine. Baltimore Album quilts are the most celebrated form.',
+    definition: 'A technique where fabric shapes are sewn onto a background fabric. Good for curved and organic designs that are hard to piece. Can be done by hand (needle-turn) or machine. Baltimore Album quilts are a famous example.',
   },
   {
     term: 'Basting',
@@ -99,13 +99,13 @@ const GLOSSARY_TERMS = [
     term: 'Backing',
     full: null,
     category: 'construction',
-    definition: 'The bottom layer of a quilt sandwich. Traditionally a single fabric, but "pieced backs" using leftover blocks or intentional designs have a long history — some antique quilts are reversible.',
+    definition: 'The bottom layer of a quilt sandwich. Traditionally a single fabric, but "pieced backs" using leftover blocks or intentional designs have a long history, and some antique quilts are reversible.',
   },
   {
     term: 'Charm Quilt',
     full: null,
     category: 'historical',
-    definition: 'A quilt in which every piece is cut from a different fabric — no fabric is repeated. Popular in the late 19th century as a way to showcase large fabric collections. Required careful planning and extensive fabric trading.',
+    definition: 'A quilt in which every piece is cut from a different fabric. Popular in the late 19th century as a way to show off a big fabric collection. Making one took careful planning and a lot of fabric trading.',
   },
   {
     term: 'Friendship Quilt',
@@ -117,7 +117,7 @@ const GLOSSARY_TERMS = [
     term: 'Album Quilt',
     full: null,
     category: 'historical',
-    definition: 'A quilt featuring different block patterns or appliqué designs, often made by multiple contributors. Baltimore Album quilts (1840s–1850s) are the most celebrated examples, with elaborate appliqué of flowers, buildings, and patriotic symbols.',
+    definition: 'A quilt featuring different block patterns or appliqué designs, often made by multiple contributors. Baltimore Album quilts (1840s–1850s) are the best-known examples, with elaborate appliqué of flowers, buildings, and patriotic symbols.',
   },
   {
     term: 'Crazy Quilt',
@@ -135,7 +135,7 @@ const GLOSSARY_TERMS = [
     term: 'Wholecloth Quilt',
     full: null,
     category: 'historical',
-    definition: 'A quilt whose top is made from a single fabric. The visual design comes entirely from the quilting stitches rather than piecing. Demands masterful quilting technique. White wholecloth quilts were traditional wedding gifts.',
+    definition: 'A quilt whose top is made from a single fabric. The visual design comes entirely from the quilting stitches rather than piecing. White wholecloth quilts were traditional wedding gifts.',
   },
   {
     term: 'Freedom Quilt',
@@ -166,7 +166,7 @@ export function renderGlossary(container) {
     <div class="section-header">
       <p class="eyebrow">Reference</p>
       <h2>Glossary</h2>
-      <p>Key terms, techniques, and acronyms from the world of quilting — from piecing basics to historical quilt types.</p>
+      <p>Quilting terms and acronyms, from piecing basics to historical quilt types.</p>
     </div>
 
     ${sortedCategories.map(([catId, cat]) => `
