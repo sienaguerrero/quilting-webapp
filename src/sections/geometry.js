@@ -1,7 +1,7 @@
 export function renderGeometry(container) {
   container.innerHTML = `
     <div class="section-header">
-      <h4>Geometry &amp; Math</h4>
+      <p class="eyebrow">Geometry &amp; Math</p>
       <h2>The Mathematics of Quilting</h2>
       <p>Quilt blocks are full of tessellations, symmetries, and rigid transformations. Quilters worked these out by hand, without the vocabulary mathematicians use.</p>
     </div>
