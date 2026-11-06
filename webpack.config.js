@@ -22,6 +22,11 @@ module.exports = (env, argv) => {
           use: [isProduction ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader'],
         },
         {
+          test: /\.woff2$/i,
+          type: 'asset/resource',
+          generator: { filename: 'fonts/[name].[contenthash][ext]' },
+        },
+        {
           test: /[\\/]src[\\/]cutters[\\/]files[\\/]/,
           type: 'asset/resource',
           generator: {
@@ -33,7 +38,6 @@ module.exports = (env, argv) => {
     plugins: [
       new HtmlWebpackPlugin({
         template: './src/index.html',
-        title: 'The Geometry of Cloth',
         chunks: ['bundle'],
       }),
       new HtmlWebpackPlugin({

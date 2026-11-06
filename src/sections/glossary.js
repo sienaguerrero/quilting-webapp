@@ -164,7 +164,7 @@ export function renderGlossary(container) {
 
   container.innerHTML = `
     <div class="section-header">
-      <h4>Reference</h4>
+      <p class="eyebrow">Reference</p>
       <h2>Glossary</h2>
       <p>Quilting terms and acronyms, from piecing basics to historical quilt types.</p>
     </div>

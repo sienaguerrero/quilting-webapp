@@ -36,7 +36,7 @@ export function renderTechniques(container) {
 
   container.innerHTML = `
     <div class="section-header">
-      <h4>Techniques</h4>
+      <p class="eyebrow">Techniques</p>
       <h2>How Quilts Are Made</h2>
       <p>Piecing, appliqué, quilting stitches, and dyeing, from hand-sewn hexagons to resist-dyed yarn.</p>
     </div>
