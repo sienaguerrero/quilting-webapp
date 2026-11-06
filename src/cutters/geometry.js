@@ -1,22 +1,10 @@
 // Mirrors the catalog in files/quilt_block_cutters.scad at its defaults. Change both together.
 export const BLOCK_MM = 75;
 
-const block = BLOCK_MM;
 const logRounds = 2;
-const hexSide = block / 4;
 const pathRadiusRatio = 2 / 3;
 const dresdenBlades = 20;
 const arcSteps = 48;
-
-const half = block / 2;
-const third = block / 3;
-const quarter = block / 4;
-const logW = block / (2 + 2 * logRounds);
-const logCenter = 2 * logW;
-const starD = block / (2 + Math.SQRT2);
-const pathR = half * pathRadiusRatio;
-const shellR = block / 4;
-const dresdenHub = block / 6;
 
 const O = [0, 0];
 const rad = (deg) => (deg * Math.PI) / 180;
@@ -69,41 +57,56 @@ const FAMILIES = [
 
 const piece = (id, label, family, points) => ({ id, label, family, points });
 
-export const PIECES = [
-  piece('square-half', 'Square, ½ block', 0, rect(half, half)),
-  piece('square-third', 'Square, ⅓ block', 0, rect(third, third)),
-  piece('square-quarter', 'Square, ¼ block', 0, rect(quarter, quarter)),
-  piece('bar-third', 'Bar, ⅓ block', 0, rect(third, third / 2)),
-  piece('rail-third', 'Rail', 0, rect(block, third)),
-  piece('snowball', 'Snowball', 0, clipped(block, third)),
+export function piecesFor(block) {
+  const half = block / 2;
+  const third = block / 3;
+  const quarter = block / 4;
+  const hexSide = block / 4;
+  const logW = block / (2 + 2 * logRounds);
+  const logCenter = 2 * logW;
+  const starD = block / (2 + Math.SQRT2);
+  const pathR = half * pathRadiusRatio;
+  const shellR = block / 4;
+  const dresdenHub = block / 6;
 
-  piece('hst-half', 'Half-square triangle, ½', 1, rtri(half)),
-  piece('hst-third', 'Half-square triangle, ⅓', 1, rtri(third)),
-  piece('hst-quarter', 'Half-square triangle, ¼', 1, rtri(quarter)),
-  piece('qst-third', 'Quarter-square triangle, ⅓', 1, iso(third)),
-  piece('goose-full', 'Flying goose, full block', 1, iso(block)),
-  piece('goose-half', 'Flying goose, ½ block', 1, iso(half)),
+  return [
+    piece('square-half', 'Square, ½ block', 0, rect(half, half)),
+    piece('square-third', 'Square, ⅓ block', 0, rect(third, third)),
+    piece('square-quarter', 'Square, ¼ block', 0, rect(quarter, quarter)),
+    piece('bar-third', 'Bar, ⅓ block', 0, rect(third, third / 2)),
+    piece('rail-third', 'Rail', 0, rect(block, third)),
+    piece('snowball', 'Snowball', 0, clipped(block, third)),
 
-  ...Array.from({ length: 2 * logRounds + 1 }, (_, k) =>
-    piece(`log${k}`, `Log ${k}`, 2, rect(logCenter + k * logW, logW))),
+    piece('hst-half', 'Half-square triangle, ½', 1, rtri(half)),
+    piece('hst-third', 'Half-square triangle, ⅓', 1, rtri(third)),
+    piece('hst-quarter', 'Half-square triangle, ¼', 1, rtri(quarter)),
+    piece('qst-third', 'Quarter-square triangle, ⅓', 1, iso(third)),
+    piece('goose-full', 'Flying goose, full block', 1, iso(block)),
+    piece('goose-half', 'Flying goose, ½ block', 1, iso(half)),
 
-  piece('path-pie', "Drunkard's path pie", 3, pie(pathR)),
-  piece('path-bite', "Drunkard's path bite", 3, bite(half, pathR)),
-  piece('peel-lens', 'Orange peel lens', 3, lens(half)),
-  piece('peel-corner', 'Orange peel corner', 3, bite(half, half)),
-  piece('clamshell', 'Clamshell', 3, clamshell(shellR)),
+    ...Array.from({ length: 2 * logRounds + 1 }, (_, k) =>
+      piece(`log${k}`, `Log ${k}`, 2, rect(logCenter + k * logW, logW))),
 
-  piece('hexagon', 'Hexagon', 4, ngon(6, hexSide)),
-  piece('diamond-60', '60° diamond', 4, rhombus(hexSide, 60)),
-  piece('triangle-60', 'Equilateral triangle', 4, ngon(3, hexSide)),
+    piece('path-pie', "Drunkard's path pie", 3, pie(pathR)),
+    piece('path-bite', "Drunkard's path bite", 3, bite(half, pathR)),
+    piece('peel-lens', 'Orange peel lens', 3, lens(half)),
+    piece('peel-corner', 'Orange peel corner', 3, bite(half, half)),
+    piece('clamshell', 'Clamshell', 3, clamshell(shellR)),
 
-  piece('lemoyne-diamond', 'LeMoyne diamond', 5, rhombus(starD, 45)),
-  piece('lemoyne-square', 'LeMoyne square', 5, rect(starD, starD)),
-  piece('lemoyne-triangle', 'LeMoyne triangle', 5, rtri(starD)),
+    piece('hexagon', 'Hexagon', 4, ngon(6, hexSide)),
+    piece('diamond-60', '60° diamond', 4, rhombus(hexSide, 60)),
+    piece('triangle-60', 'Equilateral triangle', 4, ngon(3, hexSide)),
 
-  piece('dresden-blade', 'Dresden blade', 6, dresden(dresdenBlades, half, dresdenHub)),
-  piece('dresden-center', 'Dresden center', 6, circle(dresdenHub)),
-].map((p) => ({ ...p, family: FAMILIES[p.family], size: sizeOf(p.points) }));
+    piece('lemoyne-diamond', 'LeMoyne diamond', 5, rhombus(starD, 45)),
+    piece('lemoyne-square', 'LeMoyne square', 5, rect(starD, starD)),
+    piece('lemoyne-triangle', 'LeMoyne triangle', 5, rtri(starD)),
+
+    piece('dresden-blade', 'Dresden blade', 6, dresden(dresdenBlades, half, dresdenHub)),
+    piece('dresden-center', 'Dresden center', 6, circle(dresdenHub)),
+  ].map((p) => ({ ...p, family: FAMILIES[p.family], size: sizeOf(p.points) }));
+}
+
+export const PIECES = piecesFor(BLOCK_MM);
 
 export const FAMILY_ORDER = FAMILIES.map((f) => f.name);
 
