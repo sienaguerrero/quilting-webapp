@@ -359,7 +359,7 @@ export function buildFabricPicker(targetEl, onChange) {
     <div class="fabric-picker-swatches">
       ${Object.entries(FABRIC_PALETTES).map(([id, p]) => `
         <button class="fabric-swatch ${id === 'traditional' ? 'active' : ''}"
-                data-palette="${id}" title="${p.name}">
+                data-palette="${id}" aria-label="${p.name}" aria-pressed="${id === 'traditional'}">
           <span class="swatch-dot" style="background:${p.c1}"></span>
           <span class="swatch-dot" style="background:${p.c2}"></span>
           <span class="swatch-dot" style="background:${p.c3}"></span>
@@ -371,8 +371,12 @@ export function buildFabricPicker(targetEl, onChange) {
   picker.addEventListener('click', (e) => {
     const btn = e.target.closest('.fabric-swatch');
     if (!btn) return;
-    picker.querySelectorAll('.fabric-swatch').forEach(b => b.classList.remove('active'));
+    picker.querySelectorAll('.fabric-swatch').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
     btn.classList.add('active');
+    btn.setAttribute('aria-pressed', 'true');
     onChange(btn.dataset.palette);
   });
 
