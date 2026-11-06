@@ -2,9 +2,12 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    bundle: './src/index.js',
+    cutters: './src/cutters/index.js',
+  },
   output: {
-    filename: 'bundle.[contenthash].js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
@@ -14,11 +17,24 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /[\\/]src[\\/]cutters[\\/]files[\\/]/,
+        type: 'asset/resource',
+        generator: {
+          filename: ({ filename }) => filename.replace(/^src\//, ''),
+        },
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      chunks: ['bundle'],
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/cutters/index.html',
+      filename: 'cutters/index.html',
+      chunks: ['cutters'],
     }),
   ],
   devServer: {
