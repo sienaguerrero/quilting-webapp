@@ -110,7 +110,7 @@ const BLOCK_REGISTRY = {
     name: "Jacob's Ladder",
     gridUnits: 3,
     pieces: { squares: 10, hst: 8 },
-    symmetry: 'D2',
+    symmetry: 'D1',
     tessellates: true,
     trigConcepts: ['45-45-90 triangle', 'diagonal paths'],
     difficulty: 2,
@@ -528,7 +528,7 @@ export function renderQuiltPlanner(container) {
     container.innerHTML = `
       <div class="section-header">
         <h2>Quilt Planner</h2>
-        <p class="section-intro">Design your quilt and explore the mathematics behind every cut, seam, and layout decision.</p>
+        <p class="section-intro">Plan a quilt and see the math behind its cuts, seams, and layout.</p>
       </div>
 
       <div class="planner-layout">
@@ -643,7 +643,7 @@ export function renderQuiltPlanner(container) {
           <!-- Cut Size Calculators -->
           <div class="calc-section">
             <h4>Trig: Cut Size Calculators</h4>
-            <p class="calc-intro">Every quilting cut formula traces back to the Pythagorean theorem. The diagonal of a square with side <em>s</em> is <em>s</em> × √2. Seam allowances add a fixed constant.</p>
+            <p class="calc-intro">The triangle cut formulas come from the Pythagorean theorem. The diagonal of a square with side <em>s</em> is <em>s</em> × √2. Seam allowances add a fixed constant.</p>
             <div class="calc-grid">
 
               <div class="calc-card">
@@ -688,7 +688,7 @@ export function renderQuiltPlanner(container) {
           <!-- Fabric Yield -->
           <div class="calc-section">
             <h4>Fabric Yield (Rectangle Packing)</h4>
-            <p class="calc-intro">How many squares fit in a fat quarter (18″ × 22″)? Integer division with grain-line constraints — no rotation.</p>
+            <p class="calc-intro">How many squares fit in a fat quarter (18″ × 22″)? Integer division along the grain line, with no rotated pieces.</p>
             <div class="yield-table">
               <div class="yield-header"><span>Cut Size</span><span>Per Fat Quarter</span><span>Per Yard (${FABRIC_WIDTH}″)</span></div>
               ${[2, 3, 4, 5, 6, 8, 10, 12].map(s => `
@@ -714,7 +714,7 @@ export function renderQuiltPlanner(container) {
           <details class="calc-section expandable" open>
             <summary><h4>Scale Factor &amp; Similarity</h4></summary>
             <div class="calc-card scale-article">
-              <p>When you resize a quilt block, you create a <em>similar</em> figure: all angles are preserved, all linear dimensions scale by factor <em>k</em>, and all areas scale by <em>k</em>². But there’s a catch quilters learn the hard way: <strong>seam allowances are fixed at ¼″ and do not scale.</strong></p>
+              <p>When you resize a quilt block, you create a <em>similar</em> figure: all angles are preserved, all linear dimensions scale by factor <em>k</em>, and all areas scale by <em>k</em>². One thing does not scale: <strong>seam allowances are fixed at ¼″ and do not scale.</strong></p>
 
               <div class="scale-demo">
                 <h5>The Seam Allowance Trap</h5>
@@ -733,7 +733,7 @@ export function renderQuiltPlanner(container) {
 
               <div class="scale-demo">
                 <h5>Area Scaling: Why Miniatures Use So Little Fabric</h5>
-                <p>Halve the block size and you use <strong>one quarter</strong> the fabric — not half.</p>
+                <p>Halve the block size and you use <strong>one quarter</strong> the fabric, not half.</p>
                 ${[0.5, 0.75, 1, 1.25, 1.5, 2].map(k => {
                   const pct = (k ** 2 * 100).toFixed(0);
                   return `
@@ -757,7 +757,7 @@ export function renderQuiltPlanner(container) {
                   <div class="sym-row">
                     <span class="sym-name">${sym.name}</span>
                     <span class="sym-desc">${sym.desc}</span>
-                    <span class="sym-blocks">${Symmetry.blocksForType(key).join(', ') || '—'}</span>
+                    <span class="sym-blocks">${Symmetry.blocksForType(key).join(', ') || 'none'}</span>
                   </div>
                 `).join('')}
               </div>
