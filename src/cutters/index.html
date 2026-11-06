@@ -24,9 +24,13 @@
       <div class="hero-copy">
         <p class="eyebrow">3D printing</p>
         <h1>Clay Quilt Cutters</h1>
-        <p class="lede">Cookie cutters, but for quilt blocks in clay. Every shape is sized for a 75 mm block, and every cutter comes with a pusher, so nothing stays stuck inside.</p>
+        <p class="lede">Cookie cutters, but for quilt blocks in clay. Every shape comes in three block sizes, and every cutter comes with a pusher, so nothing stays stuck inside.</p>
+        <div class="size-row">
+          <span class="size-label" id="size-label">Block size</span>
+          <div class="size-picker" id="size-picker" role="group" aria-labelledby="size-label"></div>
+        </div>
         <div class="hero-actions">
-          <a class="btn btn-clay" href="quilt-block-clay-cutters-75mm.zip" download>Download all 60 STLs</a>
+          <a class="btn btn-clay" id="zip-link" href="quilt-block-clay-cutters-75mm.zip" download>Download all 60 STLs, <span data-block-size>75</span> mm</a>
           <a class="btn btn-outline" id="scad-link" href="#" download>OpenSCAD source</a>
         </div>
       </div>
@@ -35,7 +39,7 @@
 
     <section id="pick" class="panel">
       <h2>Pick a block</h2>
-      <p class="section-lede">Each block shows the pieces to cut for one 75 mm block. The shapes it uses light up further down.</p>
+      <p class="section-lede">Each block shows the pieces to cut for one <span data-block-size>75</span> mm block. The shapes it uses light up further down.</p>
       <div class="chips" id="block-chips" role="group" aria-label="Quilt blocks"></div>
       <div class="tray" id="tray" aria-live="polite"></div>
     </section>
@@ -54,7 +58,8 @@
         <li>The hexagon, 60° diamond, and equilateral triangle share a side length, so they mix in one layout.</li>
       </ul>
       <h3>Other sizes</h3>
-      <p>Change <code>block</code> in <code>quilt_block_cutters.scad</code>, or run the export script from the zip. <code>./export.sh 100 3</code> makes 100 mm blocks with 3 Log Cabin rounds. It needs OpenSCAD installed.</p>
+      <p>This page has STLs for 60, 75, and 100 mm blocks. For any other size, change <code>block</code> in <code>quilt_block_cutters.scad</code>, or run the export script from the zip. <code>./export.sh 90 3</code> makes 90 mm blocks with 3 Log Cabin rounds. It needs OpenSCAD installed.</p>
+      <p>Below about 55 mm the Dresden blade gets too narrow for a pusher knob, and the export stops on that piece.</p>
       <h3>License</h3>
       <p>The STLs and the OpenSCAD file are licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. You can use, change, and share them, including commercially, as long as you credit Siena Guerrero.</p>
     </section>

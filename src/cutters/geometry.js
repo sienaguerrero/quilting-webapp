@@ -1,5 +1,7 @@
-// Mirrors the catalog in files/quilt_block_cutters.scad at its defaults. Change both together.
-export const BLOCK_MM = 75;
+// Mirrors the catalog in files/quilt_block_cutters.scad. Change both together.
+// Every size here needs a files/stl-<size>mm folder made by export.sh.
+export const SIZES = [60, 75, 100];
+export const DEFAULT_SIZE = 75;
 
 const logRounds = 2;
 const pathRadiusRatio = 2 / 3;
@@ -106,11 +108,7 @@ export function piecesFor(block) {
   ].map((p) => ({ ...p, family: FAMILIES[p.family], size: sizeOf(p.points) }));
 }
 
-export const PIECES = piecesFor(BLOCK_MM);
-
 export const FAMILY_ORDER = FAMILIES.map((f) => f.name);
-
-export const pieceById = Object.fromEntries(PIECES.map((p) => [p.id, p]));
 
 function sizeOf(points) {
   const xs = points.map((p) => p[0]);
