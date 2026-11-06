@@ -23,7 +23,18 @@ function initApp() {
   renderGlossary(document.getElementById('glossary'));
   initEasterEggs();
   initRouter();
+  initSkipLink();
   buildHeroGrid();
+}
+
+function initSkipLink() {
+  const link = document.querySelector('.skip-link');
+  const main = document.getElementById('app');
+  if (!link || !main) return;
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    main.focus();
+  });
 }
 
 function initRouter() {
@@ -32,29 +43,37 @@ function initRouter() {
 }
 
 function handleRoute() {
-  const hash = window.location.hash.slice(1) || 'home';
+  const requested = window.location.hash.slice(1) || 'home';
   const sections = document.querySelectorAll('.section');
   const links = document.querySelectorAll('.nav-link');
 
-  if (hash.startsWith('block/')) {
-    const blockId = hash.split('/')[1];
+  if (requested.startsWith('block/')) {
+    const blockId = requested.split('/')[1];
     sections.forEach(s => s.classList.remove('active'));
     document.getElementById('block-detail').classList.add('active');
     renderBlockDetail(document.getElementById('block-detail'), blockId);
-    links.forEach(l => {
-      l.classList.toggle('active', l.dataset.section === 'blocks');
-    });
+    links.forEach(l => setActiveLink(l, l.dataset.section === 'blocks'));
     window.scrollTo(0, 0);
     return;
   }
 
+  const known = Array.from(links).some(l => l.dataset.section === requested);
+  const hash = known ? requested : 'home';
+
   sections.forEach(s => {
     s.classList.toggle('active', s.id === hash);
   });
-  links.forEach(l => {
-    l.classList.toggle('active', l.dataset.section === hash);
-  });
+  links.forEach(l => setActiveLink(l, l.dataset.section === hash));
   window.scrollTo(0, 0);
+}
+
+function setActiveLink(link, isActive) {
+  link.classList.toggle('active', isActive);
+  if (isActive) {
+    link.setAttribute('aria-current', 'page');
+  } else {
+    link.removeAttribute('aria-current');
+  }
 }
 
 function buildHeroGrid() {

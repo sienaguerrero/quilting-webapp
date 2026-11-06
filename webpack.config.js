@@ -6,9 +6,12 @@ module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
 
   return {
-    entry: './src/index.js',
+    entry: {
+      bundle: './src/index.js',
+      cutters: './src/cutters/index.js',
+    },
     output: {
-      filename: 'bundle.[contenthash].js',
+      filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist'),
       clean: true,
     },
@@ -18,14 +21,27 @@ module.exports = (env, argv) => {
           test: /\.css$/i,
           use: [isProduction ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader'],
         },
+        {
+          test: /[\\/]src[\\/]cutters[\\/]files[\\/]/,
+          type: 'asset/resource',
+          generator: {
+            filename: ({ filename }) => filename.replace(/^src\//, ''),
+          },
+        },
       ],
     },
     plugins: [
       new HtmlWebpackPlugin({
         template: './src/index.html',
         title: 'The Geometry of Cloth',
+        chunks: ['bundle'],
       }),
-      ...(isProduction ? [new MiniCssExtractPlugin({ filename: 'styles.[contenthash].css' })] : []),
+      new HtmlWebpackPlugin({
+        template: './src/cutters/index.html',
+        filename: 'cutters/index.html',
+        chunks: ['cutters'],
+      }),
+      ...(isProduction ? [new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' })] : []),
     ],
     devServer: {
       static: './dist',
