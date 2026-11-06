@@ -2,35 +2,35 @@ export function renderTechniques(container) {
   const techniques = [
     {
       name: 'Piecing',
-      desc: 'The foundational technique — sewing cut fabric pieces together along seam lines. Pieces are typically cut in geometric shapes and joined with a quarter-inch seam allowance.',
+      desc: 'The basic technique: sewing cut pieces of fabric together along seam lines. Pieces are usually geometric shapes, joined with a quarter-inch seam allowance.',
     },
     {
       name: 'Appliqué',
-      desc: 'Sewing smaller fabric shapes onto a larger background. Allows curved, organic shapes that piecing cannot achieve. Can be done by hand (needle-turn) or machine.',
+      desc: "Sewing smaller fabric shapes onto a larger background. Good for curved, organic shapes that are hard to piece. Can be done by hand (needle-turn) or machine.",
     },
     {
       name: 'Paper Piecing (Foundation)',
-      desc: 'Sewing fabric onto a printed paper foundation following a numbered sequence. Produces extremely precise, sharp points and complex geometric designs.',
+      desc: 'Sewing fabric onto a printed paper foundation in a numbered sequence. Gives very precise, sharp points, even in complex geometric designs.',
     },
     {
       name: 'English Paper Piecing',
-      desc: 'Fabric is wrapped and basted around cardstock templates, then whipstitched together by hand. Ideal for hexagons and other tricky shapes. Highly portable.',
+      desc: "Fabric is wrapped and basted around cardstock templates, then whipstitched together by hand. Works well for hexagons and other awkward shapes, and it's easy to carry around.",
     },
     {
       name: 'Free-Motion Quilting',
-      desc: 'Moving fabric freely under a darning foot with feed dogs lowered, allowing stitching in any direction. Used for texture, fill, and decorative motifs.',
+      desc: 'Moving fabric freely under a darning foot with the feed dogs lowered, so you can stitch in any direction. Used for texture, fill, and decorative motifs.',
     },
     {
       name: 'Wholecloth Quilting',
-      desc: 'A British tradition from Northumberland and Durham — no patchwork at all. A single piece of fabric is elaborately quilted with dense patterns. The stitching skill itself is the entire art form.',
+      desc: 'A British tradition from Northumberland and Durham with no patchwork at all. A single piece of fabric is covered in dense quilted patterns, so the stitching is the whole design.',
     },
     {
       name: 'Sashiko',
-      desc: 'Japanese reinforcement stitching that originated with farming communities mending worn indigo workwear. Geometric running-stitch patterns became a recognized decorative art with hundreds of traditional designs.',
+      desc: 'Japanese reinforcement stitching that started with farming communities mending worn indigo workwear. Its geometric running-stitch patterns became a decorative art with hundreds of traditional designs.',
     },
     {
       name: 'Ikat (Resist-Dyeing)',
-      desc: 'An Otavalo weaving technique where yarn bundles are bound and dyed before weaving, creating feathered-edge patterns. The imprecision of the resist creates the distinctive soft, blurred effect.',
+      desc: 'A resist-dyeing technique practiced from Southeast Asia to the Andes, including by Otavalo weavers. Yarn bundles are bound and dyed before weaving. The binding never blocks dye perfectly, which gives ikat its soft, feathered edges.',
     },
   ];
 
@@ -38,7 +38,7 @@ export function renderTechniques(container) {
     <div class="section-header">
       <h4>Techniques</h4>
       <h2>How Quilts Are Made</h2>
-      <p>From hand-stitched hexagons to Andean resist-dyeing, the methods behind the cloth.</p>
+      <p>Piecing, appliqué, quilting stitches, and dyeing, from hand-sewn hexagons to resist-dyed yarn.</p>
     </div>
     <div class="card-grid">
       ${techniques.map(t => `

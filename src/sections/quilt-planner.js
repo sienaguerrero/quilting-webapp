@@ -110,7 +110,7 @@ const BLOCK_REGISTRY = {
     name: "Jacob's Ladder",
     gridUnits: 3,
     pieces: { squares: 10, hst: 8 },
-    symmetry: 'D2',
+    symmetry: 'D1',
     tessellates: true,
     trigConcepts: ['45-45-90 triangle', 'diagonal paths'],
     difficulty: 2,
@@ -176,8 +176,6 @@ const BLOCK_REGISTRY = {
 // ============================================
 
 const TrigCalc = {
-  // HST: diagonal = side * sqrt(2). The 7/8" seam constant comes from
-  // bias-cut seam allowance: 2 * 0.25 * sqrt(2) ≈ 0.707, rounded to 0.875
   hstCutSize(finished) {
     return finished + 0.875;
   },
@@ -191,14 +189,12 @@ const TrigCalc = {
     return finished + 2 * SEAM_ALLOWANCE;
   },
 
-  // No-waste flying geese: 1 large square + 4 small → 4 units
-  // Each unit is W x H where W = 2H
-  flyingGeeseLargeCut(finishedHeight) {
-    return finishedHeight + 1.25;
+  flyingGeeseLargeCut(finishedWidth) {
+    return finishedWidth + 1.25;
   },
 
-  flyingGeeseSmallCut(finishedHeight) {
-    return finishedHeight / 2 + 0.875;
+  flyingGeeseSmallCut(finishedWidth) {
+    return finishedWidth / 2 + 0.875;
   },
 
   // On-point setting triangles
@@ -327,7 +323,18 @@ const YardageCalc = {
 const ColorBalance = {
   distribute(totalBlocks, ratios = [60, 30, 10]) {
     const sum = ratios.reduce((a, b) => a + b, 0);
-    return ratios.map(r => Math.round(totalBlocks * r / sum));
+    const exact = ratios.map(r => totalBlocks * r / sum);
+    const counts = exact.map(Math.floor);
+    let remaining = totalBlocks - counts.reduce((a, b) => a + b, 0);
+    const byRemainder = exact
+      .map((x, i) => [x - counts[i], i])
+      .sort((a, b) => b[0] - a[0] || a[1] - b[1]);
+    for (const [, i] of byRemainder) {
+      if (remaining <= 0) break;
+      counts[i] += 1;
+      remaining -= 1;
+    }
+    return counts;
   },
 
   actualPercentages(counts) {
@@ -513,7 +520,16 @@ export function renderQuiltPlanner(container) {
     render();
   }
 
+  function focusSelector(el) {
+    if (!el || !container.contains(el)) return null;
+    if (el.id) return `#${el.id}`;
+    if (el.dataset.block) return `.palette-block[data-block="${el.dataset.block}"]`;
+    if (el.dataset.idx) return `.grid-cell[data-idx="${el.dataset.idx}"]`;
+    return null;
+  }
+
   function render() {
+    const focused = focusSelector(document.activeElement);
     const est = LayoutEngine.estimateMaterials(
       state.bedSize, state.blockSize, state.sashingWidth, state.borderWidth
     );
@@ -528,7 +544,7 @@ export function renderQuiltPlanner(container) {
     container.innerHTML = `
       <div class="section-header">
         <h2>Quilt Planner</h2>
-        <p class="section-intro">Design your quilt and explore the mathematics behind every cut, seam, and layout decision.</p>
+        <p class="section-intro">Plan a quilt and see the math behind its cuts, seams, and layout.</p>
       </div>
 
       <div class="planner-layout">
@@ -629,7 +645,10 @@ export function renderQuiltPlanner(container) {
             ">
               ${state.plan ? state.plan.flat().map((cell, i) => {
                 const blockId = cell ? cell.blockId : (state.selectedBlock || '');
-                return `<div class="grid-cell quilt-block quilt-block--${blockId}" data-idx="${i}"></div>`;
+                const r = Math.floor(i / est.grid.cols) + 1;
+                const c = (i % est.grid.cols) + 1;
+                const label = cell ? BLOCK_REGISTRY[cell.blockId].name : 'empty';
+                return `<button type="button" class="grid-cell quilt-block quilt-block--${blockId}" data-idx="${i}" aria-label="Row ${r}, column ${c}: ${label}"></button>`;
               }).join('') : ''}
             </div>
           </div>
@@ -643,14 +662,14 @@ export function renderQuiltPlanner(container) {
           <!-- Cut Size Calculators -->
           <div class="calc-section">
             <h4>Trig: Cut Size Calculators</h4>
-            <p class="calc-intro">Every quilting cut formula traces back to the Pythagorean theorem. The diagonal of a square with side <em>s</em> is <em>s</em> × √2. Seam allowances add a fixed constant.</p>
+            <p class="calc-intro">The triangle cut formulas come from the Pythagorean theorem. The diagonal of a square with side <em>s</em> is <em>s</em> × √2. Seam allowances add a fixed constant.</p>
             <div class="calc-grid">
 
               <div class="calc-card">
                 <div class="calc-label">Half-Square Triangle</div>
                 <div class="calc-formula">cut = finished + ⅞″</div>
                 <div class="calc-result">${bs}″ block → cut <strong>${frac(TrigCalc.hstCutSize(bs))}″</strong></div>
-                <div class="calc-note">Bias seam loss ≈ 2 × ¼″ × √2 ≈ 0.707″, rounded to ⅞″</div>
+                <div class="calc-note">Two straight seams (½″) plus one bias seam (¼″ × √2 ≈ 0.354″) ≈ 0.854″, rounded up to ⅞″</div>
               </div>
 
               <div class="calc-card">
@@ -661,8 +680,8 @@ export function renderQuiltPlanner(container) {
 
               <div class="calc-card">
                 <div class="calc-label">Flying Geese (no-waste)</div>
-                <div class="calc-formula">lg = height + 1¼″, sm = (height ÷ 2) + ⅞″</div>
-                <div class="calc-result">${bs}″ height → lg <strong>${frac(TrigCalc.flyingGeeseLargeCut(bs))}″</strong>, sm <strong>${frac(TrigCalc.flyingGeeseSmallCut(bs))}″</strong></div>
+                <div class="calc-formula">lg = width + 1¼″, sm = (width ÷ 2) + ⅞″</div>
+                <div class="calc-result">${bs}″ × ${bs / 2}″ unit → lg <strong>${frac(TrigCalc.flyingGeeseLargeCut(bs))}″</strong>, sm <strong>${frac(TrigCalc.flyingGeeseSmallCut(bs))}″</strong></div>
               </div>
 
               <div class="calc-card">
@@ -688,7 +707,7 @@ export function renderQuiltPlanner(container) {
           <!-- Fabric Yield -->
           <div class="calc-section">
             <h4>Fabric Yield (Rectangle Packing)</h4>
-            <p class="calc-intro">How many squares fit in a fat quarter (18″ × 22″)? Integer division with grain-line constraints — no rotation.</p>
+            <p class="calc-intro">How many squares fit in a fat quarter (18″ × 22″)? Integer division along the grain line, with no rotated pieces.</p>
             <div class="yield-table">
               <div class="yield-header"><span>Cut Size</span><span>Per Fat Quarter</span><span>Per Yard (${FABRIC_WIDTH}″)</span></div>
               ${[2, 3, 4, 5, 6, 8, 10, 12].map(s => `
@@ -714,7 +733,7 @@ export function renderQuiltPlanner(container) {
           <details class="calc-section expandable" open>
             <summary><h4>Scale Factor &amp; Similarity</h4></summary>
             <div class="calc-card scale-article">
-              <p>When you resize a quilt block, you create a <em>similar</em> figure: all angles are preserved, all linear dimensions scale by factor <em>k</em>, and all areas scale by <em>k</em>². But there’s a catch quilters learn the hard way: <strong>seam allowances are fixed at ¼″ and do not scale.</strong></p>
+              <p>When you resize a quilt block, you create a <em>similar</em> figure: all angles are preserved, all linear dimensions scale by factor <em>k</em>, and all areas scale by <em>k</em>². One thing does not scale: <strong>seam allowances are fixed at ¼″ and do not scale.</strong></p>
 
               <div class="scale-demo">
                 <h5>The Seam Allowance Trap</h5>
@@ -733,7 +752,7 @@ export function renderQuiltPlanner(container) {
 
               <div class="scale-demo">
                 <h5>Area Scaling: Why Miniatures Use So Little Fabric</h5>
-                <p>Halve the block size and you use <strong>one quarter</strong> the fabric — not half.</p>
+                <p>Halve the block size and you use <strong>one quarter</strong> the fabric, not half.</p>
                 ${[0.5, 0.75, 1, 1.25, 1.5, 2].map(k => {
                   const pct = (k ** 2 * 100).toFixed(0);
                   return `
@@ -757,7 +776,7 @@ export function renderQuiltPlanner(container) {
                   <div class="sym-row">
                     <span class="sym-name">${sym.name}</span>
                     <span class="sym-desc">${sym.desc}</span>
-                    <span class="sym-blocks">${Symmetry.blocksForType(key).join(', ') || '—'}</span>
+                    <span class="sym-blocks">${Symmetry.blocksForType(key).join(', ') || 'none'}</span>
                   </div>
                 `).join('')}
               </div>
@@ -869,6 +888,11 @@ export function renderQuiltPlanner(container) {
         render();
       });
     });
+
+    if (focused) {
+      const el = container.querySelector(focused);
+      if (el) el.focus({ preventScroll: true });
+    }
   }
 
   render();
