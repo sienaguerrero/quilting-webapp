@@ -56,13 +56,6 @@
   z-index: 7;
 }
 
-/* ---- 2. Nine-Patch ---- */
-.quilt-block--nine-patch {
-  gap: 2px;
-  padding: 2px;
-  background: var(--qb-bg);
-}
-
 /* ---- 3. Flying Geese ---- */
 .fg-row {
   flex: 1;
@@ -134,11 +127,6 @@
 .os-qst-bottom { clip-path: polygon(0% 100%, 100% 100%, 50% 50%); }
 .os-qst-left   { clip-path: polygon(0% 0%, 0% 100%, 50% 50%); }
 
-/* ---- 6. Bear's Paw ---- */
-.quilt-block--bears-paw {
-  gap: 1px;
-}
-
 /* ---- 7. Drunkard's Path ---- */
 .dp-cell {
   position: relative;
@@ -164,48 +152,6 @@
 .dp-tr { top: -65%; right: -65%; }
 .dp-bl { bottom: -65%; left: -65%; }
 .dp-br { bottom: -65%; right: -65%; }
-
-/* ---- 8. Sawtooth Star ---- */
-.ss-cell {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.ss-tri {
-  position: absolute;
-  inset: 0;
-}
-
-.ss-bg {
-  position: absolute;
-  inset: 0;
-}
-
-.ss-down .ss-tri {
-  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
-}
-
-.ss-up .ss-tri {
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-}
-
-.ss-right .ss-tri {
-  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-}
-
-.ss-left .ss-tri {
-  clip-path: polygon(100% 0%, 0% 50%, 100% 100%);
-}
-
-.ss-cell .ss-bg {
-  z-index: 0;
-}
-
-.ss-cell .ss-tri {
-  z-index: 1;
-}
 
 /* ---- 9. Grandmother's Flower Garden ---- */
 .gfg-wrap {

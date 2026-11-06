@@ -45,7 +45,7 @@
 
 .planner-setup {
   position: sticky;
-  top: calc(var(--nav-height, 60px) + var(--space-md));
+  top: calc(60px + var(--space-md));
 }
 
 .planner-field {
