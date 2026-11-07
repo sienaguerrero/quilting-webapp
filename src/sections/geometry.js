@@ -3,7 +3,7 @@ export function renderGeometry(container) {
     <div class="section-header">
       <p class="eyebrow">Geometry &amp; Math</p>
       <h2>The Mathematics of Quilting</h2>
-      <p>Quilt blocks are full of tessellations, symmetries, and rigid transformations. Quilters worked these out by hand, without the vocabulary mathematicians use.</p>
+      <p>Quilt blocks are full of tessellations, symmetries, and rigid transformations.</p>
     </div>
 
     <div class="content-split">
@@ -89,7 +89,6 @@ export function renderGeometry(container) {
       </div>
       <div>
         <h3>Craft Before Theory</h3>
-        <p>Quilters were setting blocks by translation, rotation, and reflection long before group theory gave those moves names.</p>
         <p>Evgraf Fedorov classified the 17 wallpaper groups in 1891. Quilts with many of those symmetries are older than that.</p>
       </div>
     </div>
