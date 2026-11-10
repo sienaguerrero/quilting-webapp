@@ -138,6 +138,51 @@ h4 {
   color: var(--ink);
 }
 
+.size-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 0.9rem;
+  margin-top: 1.5rem;
+}
+
+.size-label {
+  font-family: var(--font-fun);
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.size-picker {
+  display: inline-flex;
+  padding: 4px;
+  gap: 4px;
+  background: var(--slab);
+  border: 2px solid var(--line);
+  border-radius: 999px;
+}
+
+.size-option {
+  font-family: var(--font-fun);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.size-option:hover {
+  color: var(--clay-deep);
+}
+
+.size-option[aria-pressed='true'] {
+  background: var(--clay);
+  color: #fff;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -281,6 +326,7 @@ h4 {
 }
 
 .chip:focus-visible,
+.size-option:focus-visible,
 .btn:focus-visible,
 .dl:focus-visible,
 .tray-group:focus-visible {
@@ -437,7 +483,7 @@ h4 {
 }
 
 .piece-stage {
-  height: 168px;
+  height: calc(168px * max(1, var(--block-scale, 1)));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -563,7 +609,7 @@ h4 {
   }
 
   .piece-stage {
-    height: 140px;
+    height: calc(140px * max(1, var(--block-scale, 1)));
   }
 }
 
@@ -579,6 +625,7 @@ h4 {
 
   .piece-stage .shape,
   .chip,
+  .size-option,
   .btn {
     transition: none;
   }

@@ -1,6 +1,6 @@
 # Quilt block clay cutters
 
-Cutter counts per block, for the default 75 mm block. Every size scales with `block`.
+Cutter counts per block. The counts are the same at every block size. Each zip holds one size, in its `stl-<size>mm` folder, and every piece scales with `block`.
 
 | Block | Cutters (count per block) |
 |---|---|

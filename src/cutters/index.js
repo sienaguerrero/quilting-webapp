@@ -1,26 +1,89 @@
 import './cutters.css';
-import { PIECES, FAMILY_ORDER, pieceById, shapeSvg, mm, BLOCK_MM } from './geometry';
+import { piecesFor, FAMILY_ORDER, shapeSvg, mm, SIZES, DEFAULT_SIZE } from './geometry';
 import { BLOCKS, DEFAULT_BLOCK } from './blocks';
 
 const files = require.context('./files', true, /\.(stl|scad|md|sh|txt)$/);
 const fileUrl = (rel) => files(`./${rel}`);
-const stlUrl = (id, part) => fileUrl(`stl-${BLOCK_MM}mm/${id}-${part}.stl`);
 
 const TESSELLATING_PREVIEW = 6;
 const HERO_PIECES = ['clamshell', 'hexagon', 'peel-lens', 'goose-half', 'dresden-blade', 'path-pie', 'lemoyne-diamond', 'snowball'];
+const COUNT_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+
+const state = { size: DEFAULT_SIZE, pieces: [], pieceById: {}, block: null };
+
+function setSize(size) {
+  state.size = SIZES.includes(size) ? size : DEFAULT_SIZE;
+  state.pieces = piecesFor(state.size);
+  state.pieceById = Object.fromEntries(state.pieces.map((p) => [p.id, p]));
+}
+
+const stlUrl = (id, part) => fileUrl(`stl-${state.size}mm/${id}-${part}.stl`);
+
+const countWord = (n) => COUNT_WORDS[n] ?? String(n);
+
+function listWords(items) {
+  if (items.length < 3) return items.join(' and ');
+  return `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`;
+}
+
+function renderSizeProse() {
+  document.querySelectorAll('[data-size-count]').forEach((el) => {
+    el.textContent = countWord(SIZES.length);
+  });
+  document.querySelectorAll('[data-size-list]').forEach((el) => {
+    el.textContent = listWords(SIZES);
+  });
+}
+
+function syncSizeParam() {
+  const url = new URL(location.href);
+  if (state.size === DEFAULT_SIZE) url.searchParams.delete('size');
+  else url.searchParams.set('size', state.size);
+  history.replaceState(null, '', url);
+}
 
 function renderHero() {
+  const heroPieces = Object.fromEntries(piecesFor(DEFAULT_SIZE).map((p) => [p.id, p]));
   const art = document.getElementById('hero-art');
   art.innerHTML = HERO_PIECES.map((id, i) => {
-    const p = pieceById[id];
+    const p = heroPieces[id];
     return `<span class="floater floater--${i}" style="--piece: ${p.family.color}">${shapeSvg(p, { scale: 1.6 })}</span>`;
   }).join('');
+}
+
+function renderSizePicker() {
+  const mount = document.getElementById('size-picker');
+  mount.innerHTML = SIZES.map((s) => `
+    <button type="button" class="size-option" data-size="${s}" aria-pressed="false">${s} mm</button>
+  `).join('');
+  mount.addEventListener('click', (e) => {
+    const option = e.target.closest('.size-option');
+    if (!option) return;
+    applySize(Number(option.dataset.size));
+    syncSizeParam();
+  });
+}
+
+function applySize(size) {
+  setSize(size);
+
+  document.querySelectorAll('.size-option').forEach((o) => {
+    o.setAttribute('aria-pressed', String(Number(o.dataset.size) === state.size));
+  });
+  document.querySelectorAll('[data-block-size]').forEach((el) => {
+    el.textContent = state.size;
+  });
+  document.getElementById('zip-link').href = `quilt-block-clay-cutters-${state.size}mm.zip`;
+  document.documentElement.style.setProperty('--block-scale', state.size / DEFAULT_SIZE);
+
+  renderFamilies();
+  if (state.block) selectBlock(state.block.slug);
 }
 
 function renderFamilies() {
   const mount = document.getElementById('families');
   mount.innerHTML = FAMILY_ORDER.map((family) => {
-    const cards = PIECES.filter((p) => p.family.name === family).map(pieceCard).join('');
+    const cards = state.pieces.filter((p) => p.family.name === family).map(pieceCard).join('');
     return `
       <div class="family">
         <h3>${family}</h3>
@@ -58,6 +121,7 @@ function renderChips() {
 
 function selectBlock(slug) {
   const block = BLOCKS.find((b) => b.slug === slug) || BLOCKS.find((b) => b.slug === DEFAULT_BLOCK);
+  state.block = block;
 
   document.querySelectorAll('.chip').forEach((c) => {
     c.setAttribute('aria-pressed', String(c.dataset.block === block.slug));
@@ -84,7 +148,7 @@ function renderTray(block) {
     : `${total} pieces from ${shapes} ${shapes === 1 ? 'shape' : 'shapes'}`;
 
   const groups = block.pieces.map(([id, n]) => {
-    const p = pieceById[id];
+    const p = state.pieceById[id];
     const copies = n || TESSELLATING_PREVIEW;
     const minis = Array.from({ length: copies }, (_, i) =>
       `<span class="mini" style="--i: ${i}">${shapeSvg(p, { scale: 1, pad: 1.5 })}</span>`).join('');
@@ -98,7 +162,7 @@ function renderTray(block) {
   document.getElementById('tray').innerHTML = `
     <div class="tray-head">
       <h3>${block.name}${block.grid ? ` <span class="tray-grid">${block.grid}</span>` : ''}</h3>
-      <p>${summary}</p>
+      <p>${summary} at ${state.size} mm</p>
     </div>
     <div class="tray-groups">${groups}</div>
     ${block.note ? `<p class="tray-note">${block.note}</p>` : ''}`;
@@ -107,8 +171,11 @@ function renderTray(block) {
 function init() {
   document.getElementById('scad-link').href = fileUrl('quilt_block_cutters.scad');
   renderHero();
-  renderFamilies();
+  renderSizeProse();
+  renderSizePicker();
   renderChips();
+  applySize(Number(new URLSearchParams(location.search).get('size')));
+  syncSizeParam();
   selectBlock(location.hash.slice(1));
 }
 

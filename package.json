@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "webpack serve --mode development",
-    "build": "webpack --mode production && cd dist/cutters/files && chmod +x export.sh && zip -qrX ../quilt-block-clay-cutters-75mm.zip ."
+    "build": "webpack --mode production && cd dist/cutters/files && chmod +x export.sh && for d in stl-*mm; do zip -qrX ../quilt-block-clay-cutters-${d#stl-}.zip LICENSE.txt README.md export.sh quilt_block_cutters.scad $d; done"
   },
   "devDependencies": {
     "css-loader": "^7.1.5",
