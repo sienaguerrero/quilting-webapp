@@ -7,6 +7,7 @@ const fileUrl = (rel) => files(`./${rel}`);
 
 const TESSELLATING_PREVIEW = 6;
 const HERO_PIECES = ['clamshell', 'hexagon', 'peel-lens', 'goose-half', 'dresden-blade', 'path-pie', 'lemoyne-diamond', 'snowball'];
+const COUNT_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
 
 const state = { size: DEFAULT_SIZE, pieces: [], pieceById: {}, block: null };
 
@@ -17,6 +18,29 @@ function setSize(size) {
 }
 
 const stlUrl = (id, part) => fileUrl(`stl-${state.size}mm/${id}-${part}.stl`);
+
+const countWord = (n) => COUNT_WORDS[n] ?? String(n);
+
+function listWords(items) {
+  if (items.length < 3) return items.join(' and ');
+  return `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`;
+}
+
+function renderSizeProse() {
+  document.querySelectorAll('[data-size-count]').forEach((el) => {
+    el.textContent = countWord(SIZES.length);
+  });
+  document.querySelectorAll('[data-size-list]').forEach((el) => {
+    el.textContent = listWords(SIZES);
+  });
+}
+
+function syncSizeParam() {
+  const url = new URL(location.href);
+  if (state.size === DEFAULT_SIZE) url.searchParams.delete('size');
+  else url.searchParams.set('size', state.size);
+  history.replaceState(null, '', url);
+}
 
 function renderHero() {
   const heroPieces = Object.fromEntries(piecesFor(DEFAULT_SIZE).map((p) => [p.id, p]));
@@ -36,10 +60,7 @@ function renderSizePicker() {
     const option = e.target.closest('.size-option');
     if (!option) return;
     applySize(Number(option.dataset.size));
-    const url = new URL(location.href);
-    if (state.size === DEFAULT_SIZE) url.searchParams.delete('size');
-    else url.searchParams.set('size', state.size);
-    history.replaceState(null, '', url);
+    syncSizeParam();
   });
 }
 
@@ -150,9 +171,11 @@ function renderTray(block) {
 function init() {
   document.getElementById('scad-link').href = fileUrl('quilt_block_cutters.scad');
   renderHero();
+  renderSizeProse();
   renderSizePicker();
   renderChips();
   applySize(Number(new URLSearchParams(location.search).get('size')));
+  syncSizeParam();
   selectBlock(location.hash.slice(1));
 }
 
