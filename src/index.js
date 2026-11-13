@@ -4,6 +4,7 @@ import './styles/quilt-patterns.css';
 import './styles/geometry.css';
 import './styles/wallpaper.css';
 import './styles/quilt-planner.css';
+import './styles/cut-list.css';
 
 import { renderHistory } from './sections/history';
 import { renderTechniques } from './sections/techniques';
@@ -13,6 +14,7 @@ import { renderGeometry } from './sections/geometry';
 import { renderWallpaperGroups } from './sections/wallpaper-groups';
 import { initEasterEggs } from './sections/easter-eggs';
 import { renderQuiltPlanner } from './sections/quilt-planner';
+import { renderCutList } from './sections/cut-list';
 import { renderGlossary } from './sections/glossary';
 
 function initApp() {
@@ -22,6 +24,7 @@ function initApp() {
   renderGeometry(document.getElementById('geometry'));
   renderWallpaperGroups(document.getElementById('wallpaper'));
   renderQuiltPlanner(document.getElementById('planner'));
+  renderCutList(document.getElementById('cutlist'));
   renderGlossary(document.getElementById('glossary'));
   initEasterEggs();
   initRouter();
