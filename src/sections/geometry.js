@@ -47,6 +47,19 @@ export function renderGeometry(container) {
       </div>
     </div>
 
+    <div class="content-split">
+      <div>
+        <h3>Why ⅞″?</h3>
+        <p>A plain square gets ¼″ of seam allowance on each side, so you cut it ½″ bigger than it finishes. A half-square triangle also has a seam on its diagonal. That seam sits ¼″ from the bias edge, and measured along the square's side it takes ¼″ × √2 more.</p>
+        <p>So the exact extra for a half-square triangle is ½ + √2⁄4, about 0.854″. A quarter-square triangle has two bias edges, and its extra is ½ + √2⁄2, about 1.207″. Neither lands on a ruler line. Quilters round up to ⅞″ and 1¼″ and trim the sliver after sewing.</p>
+      </div>
+      <div>
+        <h3>When a Size Won't Cut</h3>
+        <p>A ruler is marked in eighths. An Ohio Star sits on a 3 × 3 grid, so a 10″ star needs 3⅓″ patches, and no line on the ruler gives you that. A finished size that divides by ⅜″ cuts cleanly: 9¾″, 10⅛″, or 10½″. A Churn Dash with split bars sits on a 6 × 6 grid, so it needs a size that divides by ¾″.</p>
+        <p>The <a href="#cutlist">cut lists</a> check this for every block and suggest the nearest sizes that land on the lines.</p>
+      </div>
+    </div>
+
     <h3>Connections to Mathematical Fields</h3>
     <div class="math-card-grid">
       <div class="math-card">
