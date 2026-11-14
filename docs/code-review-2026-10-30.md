@@ -2,11 +2,11 @@
 
 Repo: https://github.com/sienaguerrero/quilting-webapp, default branch `main` at `1f126b0` (three commits). Reviewed 2026-10-30. Live site: https://quarterinch.siena.codes/ (GitHub Pages, workflow deploy, HTTPS enforced).
 
-Method: read all 23 tracked files; ran `npm ci` and `npm run build` (webpack 5.106.2, Node 24.17.0); served `dist/` locally and probed it in the Claude desktop browser pane (Chromium). Every "(checked against primary source)" tag below means I read the file, ran the command, or measured it in that browser. "(from memory, unverified)" means I did not.
+Method: read all 23 tracked files; ran `npm ci` and `npm run build` (webpack 5.106.2, Node 24.17.0); served `dist/` locally and probed it in a Chromium browser. Every "(checked against primary source)" tag below means I read the file, ran the command, or measured it in that browser. "(from memory, unverified)" means I did not.
 
 ## Read this first: 15 draft PRs already exist
 
-PRs #2 through #16 on this repo, all draft, all by sienaguerrero, were opened 2026-10-30 between 12:31 and 12:46 PDT, about six and a half hours before this review, and all carry the Claude Code footer (checked against primary source). They cover most of what a review of `main` turns up. Each finding below says which open PR addresses it, or "No PR". I verified the PRs' claims where it was cheap:
+PRs #2 through #16 on this repo, all draft, all by sienaguerrero, were opened 2026-10-30 between 12:31 and 12:46 PDT, about six and a half hours before this review (checked against primary source). They cover most of what a review of `main` turns up. Each finding below says which open PR addresses it, or "No PR". I verified the PRs' claims where it was cheap:
 
 - PR #10's four SHAs resolve to the tags named in their comments (checked against primary source via the GitHub API).
 - PR #9's branch builds, and `npm audit` on it reports 5 moderate, 0 high, 0 critical, matching its body (checked against primary source).
