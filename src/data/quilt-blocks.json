@@ -1,0 +1,569 @@
+{
+  "generatedBy": "quilt-blocks/export.py",
+  "blocks": {
+    "half-square-triangle": {
+      "name": "Half-Square Triangle",
+      "grid": 1,
+      "fabrics": [
+        "dark",
+        "light"
+      ],
+      "placements": [
+        {
+          "unit": {
+            "type": "HalfSquareTriangle",
+            "cornerFabric": "dark",
+            "otherFabric": "light",
+            "corner": "bottom-left"
+          },
+          "row": 0,
+          "col": 0,
+          "rows": 1,
+          "cols": 1
+        }
+      ]
+    },
+    "hourglass": {
+      "name": "Hourglass",
+      "grid": 1,
+      "fabrics": [
+        "dark",
+        "light"
+      ],
+      "placements": [
+        {
+          "unit": {
+            "type": "QuarterSquareTriangle",
+            "top": "dark",
+            "right": "light",
+            "bottom": "dark",
+            "left": "light"
+          },
+          "row": 0,
+          "col": 0,
+          "rows": 1,
+          "cols": 1
+        }
+      ]
+    },
+    "four-patch": {
+      "name": "Four Patch",
+      "grid": 2,
+      "fabrics": [
+        "dark",
+        "light"
+      ],
+      "placements": [
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "dark"
+          },
+          "row": 0,
+          "col": 0,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "light"
+          },
+          "row": 0,
+          "col": 1,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "light"
+          },
+          "row": 1,
+          "col": 0,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "dark"
+          },
+          "row": 1,
+          "col": 1,
+          "rows": 1,
+          "cols": 1
+        }
+      ]
+    },
+    "nine-patch": {
+      "name": "Nine Patch",
+      "grid": 3,
+      "fabrics": [
+        "dark",
+        "light"
+      ],
+      "placements": [
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "dark"
+          },
+          "row": 0,
+          "col": 0,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "light"
+          },
+          "row": 0,
+          "col": 1,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "dark"
+          },
+          "row": 0,
+          "col": 2,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "light"
+          },
+          "row": 1,
+          "col": 0,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "dark"
+          },
+          "row": 1,
+          "col": 1,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "light"
+          },
+          "row": 1,
+          "col": 2,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "dark"
+          },
+          "row": 2,
+          "col": 0,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "light"
+          },
+          "row": 2,
+          "col": 1,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "dark"
+          },
+          "row": 2,
+          "col": 2,
+          "rows": 1,
+          "cols": 1
+        }
+      ]
+    },
+    "ohio-star": {
+      "name": "Ohio Star",
+      "grid": 3,
+      "fabrics": [
+        "background",
+        "star",
+        "center"
+      ],
+      "placements": [
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "background"
+          },
+          "row": 0,
+          "col": 0,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "QuarterSquareTriangle",
+            "top": "background",
+            "right": "star",
+            "bottom": "background",
+            "left": "star"
+          },
+          "row": 0,
+          "col": 1,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "background"
+          },
+          "row": 0,
+          "col": 2,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "QuarterSquareTriangle",
+            "top": "star",
+            "right": "background",
+            "bottom": "star",
+            "left": "background"
+          },
+          "row": 1,
+          "col": 0,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "center"
+          },
+          "row": 1,
+          "col": 1,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "QuarterSquareTriangle",
+            "top": "star",
+            "right": "background",
+            "bottom": "star",
+            "left": "background"
+          },
+          "row": 1,
+          "col": 2,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "background"
+          },
+          "row": 2,
+          "col": 0,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "QuarterSquareTriangle",
+            "top": "background",
+            "right": "star",
+            "bottom": "background",
+            "left": "star"
+          },
+          "row": 2,
+          "col": 1,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "background"
+          },
+          "row": 2,
+          "col": 2,
+          "rows": 1,
+          "cols": 1
+        }
+      ]
+    },
+    "sawtooth-star": {
+      "name": "Sawtooth Star",
+      "grid": 4,
+      "fabrics": [
+        "background",
+        "star"
+      ],
+      "placements": [
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "background"
+          },
+          "row": 0,
+          "col": 0,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "FlyingGeese",
+            "goose": "background",
+            "sky": "star",
+            "points": "down"
+          },
+          "row": 0,
+          "col": 1,
+          "rows": 1,
+          "cols": 2
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "background"
+          },
+          "row": 0,
+          "col": 3,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "FlyingGeese",
+            "goose": "background",
+            "sky": "star",
+            "points": "right"
+          },
+          "row": 1,
+          "col": 0,
+          "rows": 2,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "star"
+          },
+          "row": 1,
+          "col": 1,
+          "rows": 2,
+          "cols": 2
+        },
+        {
+          "unit": {
+            "type": "FlyingGeese",
+            "goose": "background",
+            "sky": "star",
+            "points": "left"
+          },
+          "row": 1,
+          "col": 3,
+          "rows": 2,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "background"
+          },
+          "row": 3,
+          "col": 0,
+          "rows": 1,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "FlyingGeese",
+            "goose": "background",
+            "sky": "star",
+            "points": "up"
+          },
+          "row": 3,
+          "col": 1,
+          "rows": 1,
+          "cols": 2
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "background"
+          },
+          "row": 3,
+          "col": 3,
+          "rows": 1,
+          "cols": 1
+        }
+      ]
+    },
+    "churn-dash": {
+      "name": "Churn Dash",
+      "grid": 6,
+      "fabrics": [
+        "dash",
+        "background"
+      ],
+      "placements": [
+        {
+          "unit": {
+            "type": "HalfSquareTriangle",
+            "cornerFabric": "dash",
+            "otherFabric": "background",
+            "corner": "top-left"
+          },
+          "row": 0,
+          "col": 0,
+          "rows": 2,
+          "cols": 2
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "background"
+          },
+          "row": 0,
+          "col": 2,
+          "rows": 1,
+          "cols": 2
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "dash"
+          },
+          "row": 1,
+          "col": 2,
+          "rows": 1,
+          "cols": 2
+        },
+        {
+          "unit": {
+            "type": "HalfSquareTriangle",
+            "cornerFabric": "dash",
+            "otherFabric": "background",
+            "corner": "top-right"
+          },
+          "row": 0,
+          "col": 4,
+          "rows": 2,
+          "cols": 2
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "background"
+          },
+          "row": 2,
+          "col": 0,
+          "rows": 2,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "dash"
+          },
+          "row": 2,
+          "col": 1,
+          "rows": 2,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "background"
+          },
+          "row": 2,
+          "col": 2,
+          "rows": 2,
+          "cols": 2
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "dash"
+          },
+          "row": 2,
+          "col": 4,
+          "rows": 2,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "background"
+          },
+          "row": 2,
+          "col": 5,
+          "rows": 2,
+          "cols": 1
+        },
+        {
+          "unit": {
+            "type": "HalfSquareTriangle",
+            "cornerFabric": "dash",
+            "otherFabric": "background",
+            "corner": "bottom-left"
+          },
+          "row": 4,
+          "col": 0,
+          "rows": 2,
+          "cols": 2
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "dash"
+          },
+          "row": 4,
+          "col": 2,
+          "rows": 1,
+          "cols": 2
+        },
+        {
+          "unit": {
+            "type": "Plain",
+            "fabric": "background"
+          },
+          "row": 5,
+          "col": 2,
+          "rows": 1,
+          "cols": 2
+        },
+        {
+          "unit": {
+            "type": "HalfSquareTriangle",
+            "cornerFabric": "dash",
+            "otherFabric": "background",
+            "corner": "bottom-right"
+          },
+          "row": 4,
+          "col": 4,
+          "rows": 2,
+          "cols": 2
+        }
+      ]
+    }
+  }
+}

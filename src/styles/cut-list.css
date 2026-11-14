@@ -1,0 +1,144 @@
+.cutlist-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.cutlist-controls .planner-field {
+  flex: 0 1 16rem;
+}
+
+.cutlist-controls input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+}
+
+.cutlist-controls input[aria-invalid='true'] {
+  border-color: #b8412c;
+}
+
+.cutlist-help {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin: 4px 0 0;
+}
+
+.cutlist-result {
+  display: grid;
+  grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.cutlist-figure {
+  margin: 0;
+}
+
+.cutlist-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.cutlist-figure figcaption {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: var(--space-xs);
+}
+
+.cutlist-fabric {
+  margin-bottom: var(--space-md);
+}
+
+.cutlist-fabric h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  text-transform: capitalize;
+  margin: 0 0 var(--space-xs);
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cutlist-swatch {
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 1px solid var(--color-text-muted);
+  border-radius: 2px;
+}
+
+.cutlist-fabric ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cutlist-fabric li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  padding: 4px 0;
+  font-size: 0.9rem;
+}
+
+.cutlist-count {
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.cutlist-flag {
+  display: block;
+  font-size: 0.75rem;
+  color: #8a3a22;
+}
+
+.cutlist-warning {
+  background: var(--color-bg-warm);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid #d9a43b;
+  border-radius: 4px;
+  padding: var(--space-xs) var(--space-sm);
+  margin-bottom: var(--space-md);
+  font-size: 0.85rem;
+}
+
+.cutlist-warning p {
+  margin: 0 0 4px;
+}
+
+.cutlist-size {
+  font: inherit;
+  font-weight: 600;
+  padding: 2px 10px;
+  margin-right: 4px;
+  border: 1px solid var(--color-accent-dark);
+  border-radius: 999px;
+  background: var(--color-card-bg);
+  color: var(--color-accent-dark);
+  cursor: pointer;
+}
+
+.cutlist-size:hover,
+.cutlist-size:focus-visible {
+  background: var(--color-accent);
+  color: var(--color-text);
+}
+
+@media (max-width: 768px) {
+  .cutlist-result {
+    grid-template-columns: 1fr;
+  }
+
+  .cutlist-figure {
+    max-width: 18rem;
+  }
+}

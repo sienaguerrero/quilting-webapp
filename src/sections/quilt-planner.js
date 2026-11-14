@@ -1,4 +1,5 @@
 import { BLOCK_BUILDERS, FABRIC_PALETTES, applyPalette } from './block-patterns';
+import { roundUpToRuler, ruler } from '../lib/ruler.js';
 
 // ============================================
 // CONSTANTS
@@ -435,16 +436,6 @@ const LayoutEngine = {
 // RENDER
 // ============================================
 
-function frac(n) {
-  const wholes = Math.floor(n);
-  const rem = n - wholes;
-  const eighths = Math.round(rem * 8);
-  const fracs = { 0: '', 1: '⅛', 2: '¼', 3: '⅜', 4: '½', 5: '⅝', 6: '¾', 7: '⅞', 8: '' };
-  if (eighths === 0) return `${wholes}`;
-  if (eighths === 8) return `${wholes + 1}`;
-  return wholes ? `${wholes}${fracs[eighths]}` : fracs[eighths];
-}
-
 export function renderQuiltPlanner(container) {
   let state = {
     bedSize: 'queen',
@@ -609,26 +600,27 @@ export function renderQuiltPlanner(container) {
               <div class="calc-card">
                 <div class="calc-label">Half-Square Triangle</div>
                 <div class="calc-formula">cut = finished + ⅞″</div>
-                <div class="calc-result">${bs}″ block → cut <strong>${frac(TrigCalc.hstCutSize(bs))}″</strong></div>
+                <div class="calc-result">${bs}″ block → cut <strong>${ruler(TrigCalc.hstCutSize(bs))}</strong></div>
                 <div class="calc-note">Two straight seams (½″) plus one bias seam (¼″ × √2 ≈ 0.354″) ≈ 0.854″, rounded up to ⅞″</div>
               </div>
 
               <div class="calc-card">
                 <div class="calc-label">Quarter-Square Triangle</div>
                 <div class="calc-formula">cut = finished + 1¼″</div>
-                <div class="calc-result">${bs}″ block → cut <strong>${frac(TrigCalc.qstCutSize(bs))}″</strong></div>
+                <div class="calc-result">${bs}″ block → cut <strong>${ruler(TrigCalc.qstCutSize(bs))}</strong></div>
               </div>
 
               <div class="calc-card">
                 <div class="calc-label">Flying Geese (no-waste)</div>
                 <div class="calc-formula">lg = width + 1¼″, sm = (width ÷ 2) + ⅞″</div>
-                <div class="calc-result">${bs}″ × ${bs / 2}″ unit → lg <strong>${frac(TrigCalc.flyingGeeseLargeCut(bs))}″</strong>, sm <strong>${frac(TrigCalc.flyingGeeseSmallCut(bs))}″</strong></div>
+                <div class="calc-result">${bs}″ × ${bs / 2}″ unit → lg <strong>${ruler(TrigCalc.flyingGeeseLargeCut(bs))}</strong>, sm <strong>${ruler(TrigCalc.flyingGeeseSmallCut(bs))}</strong></div>
               </div>
 
               <div class="calc-card">
                 <div class="calc-label">Setting Triangles (on-point)</div>
                 <div class="calc-formula">side = block × √2 + 1¼″ &nbsp;|&nbsp; corner = (block × √2 ÷ 2) + ⅞″</div>
-                <div class="calc-result">${bs}″ block → side <strong>${TrigCalc.sideSettingCut(bs).toFixed(2)}″</strong>, corner <strong>${TrigCalc.cornerSettingCut(bs).toFixed(2)}″</strong></div>
+                <div class="calc-result">${bs}″ block → side <strong>${ruler(roundUpToRuler(TrigCalc.sideSettingCut(bs)))}</strong>, corner <strong>${ruler(roundUpToRuler(TrigCalc.cornerSettingCut(bs)))}</strong></div>
+                <div class="calc-note">√2 never lands on a ruler line, so these round up to the next ⅛″ (about ${TrigCalc.sideSettingCut(bs).toFixed(3)}″ and ${TrigCalc.cornerSettingCut(bs).toFixed(3)}″). Trim the edge after sewing.</div>
               </div>
 
               <div class="calc-card">
